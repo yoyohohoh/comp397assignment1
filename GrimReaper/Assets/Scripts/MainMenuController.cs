@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] GameObject menu;
+    [SerializeField] GameObject options;
 
     public void Start()
     {
         menu.SetActive(false);
+        options.SetActive(false);
     }
     public void OpenMenu()
     {
@@ -34,9 +36,16 @@ public class MainMenuController : MonoBehaviour
         // Load game
     }
 
-    public void Options()
+    public void OpenOptions()
     {
         // Open options menu
+        options.SetActive(true);
+    }
+
+    public void CloseOptions()
+    {
+        // Close options menu
+        options.SetActive(false);
     }
 
     public void ExitGame()
