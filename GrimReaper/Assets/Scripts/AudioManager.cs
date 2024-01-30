@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
 
     public void SoundVolume()
     {
-        sound.GetComponent<AudioSource>().volume = soundOption.GetComponent<Slider>().value;
+        //sound.GetComponent<AudioSource>().volume = soundOption.GetComponent<Slider>().value;
     }
 
 }
