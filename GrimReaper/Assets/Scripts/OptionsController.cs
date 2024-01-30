@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
+using UnityEngine.UI;
 
 public class OptionsController : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class OptionsController : MonoBehaviour
     [SerializeField] GameObject keyOption2On;
     [SerializeField] GameObject keyOption1Off;
     [SerializeField] GameObject keyOption2Off;
+    [SerializeField] GameObject musicSlide;
+    [SerializeField] GameObject soundSlide;
 
     public void Start()
     {
         SetKeyToOption1();
+        musicSlide.GetComponent<Slider>().value = 1.0f;
+        soundSlide.GetComponent<Slider>().value = 1.0f;
     }
 
     public void OpenOptionsPanel()
