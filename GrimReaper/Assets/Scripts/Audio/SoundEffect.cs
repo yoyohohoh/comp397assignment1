@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class SoundEffect : MonoBehaviour
 {
-    private LifeSystem lifeSystem;
+    //private LifeSystem lifeSystem;
 
     void Start()
     {
 
-        lifeSystem = GameObject.Find("LifeSystem").GetComponent<LifeSystem>();
+        //lifeSystem = GameObject.Find("LifeSystem").GetComponent<LifeSystem>();
 
 
     }

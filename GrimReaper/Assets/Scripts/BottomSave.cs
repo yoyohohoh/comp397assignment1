@@ -5,14 +5,14 @@ using UnityEngine;
 public class BottomSave : MonoBehaviour
 {
     
-    PlayerController playerController;
+   //PlayerController playerController;
 
     private void Start()
     {
-        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        //playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
     private void OnCollisionEnter(Collision other)
     {
-        playerController.InitialPosition();
+       //playerController.InitialPosition();
     }
 }
