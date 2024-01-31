@@ -10,6 +10,10 @@ public class DataKeeper : MonoBehaviour
     public float musicVolume;
     public float soundVolume;
 
+    private OptionsController optionsController;
+    public float musicSlide;
+    public float soundSlide;
+
     private void Awake()
     {
         if (Instance != null)
@@ -20,11 +24,35 @@ public class DataKeeper : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+    }
+    public void Start()
+    {
+
+    }
+
+    public void FixedUpdate()
+    {
+        optionsController = OptionsController.Instance;
+        optionsController.musicVolumeLevel = DataKeeper.Instance.musicVolume;
+        optionsController.soundVolumeLevel = DataKeeper.Instance.soundVolume;
     }
 
     public void Update()
     {
-        DataKeeper.Instance.musicVolume = musicOption.GetComponent<Slider>().value;
-        DataKeeper.Instance.soundVolume = soundOption.GetComponent<Slider>().value;
+        Debug.Log("Music: " + musicVolume + "; Sound: " + soundSlide);
+        musicSlide = optionsController.musicVolumeLevel;
+        soundSlide = optionsController.soundVolumeLevel;
+        SetMusicVolume(musicSlide);
+        SetSoundVolume(soundSlide);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        DataKeeper.Instance.musicVolume = volume;
+    }
+    public void SetSoundVolume(float volume)
+    {
+        DataKeeper.Instance.soundVolume = volume;
     }
 }

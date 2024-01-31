@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Progress;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class OptionsController : MonoBehaviour
 {
+    public static OptionsController _instance;
+    public static OptionsController Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+    private DataKeeper dataKeeper;
+
     [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject keyOption1On;
     [SerializeField] GameObject keyOption2On;
@@ -13,12 +25,48 @@ public class OptionsController : MonoBehaviour
     [SerializeField] GameObject keyOption2Off;
     [SerializeField] GameObject musicSlide;
     [SerializeField] GameObject soundSlide;
+    public float musicVolumeLevel;
+    public float soundVolumeLevel;
+    public bool isFirstTime;
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+            
+
+        }
+
+
+    }
 
     public void Start()
     {
         SetKeyToOption1();
-        musicSlide.GetComponent<Slider>().value = 1.0f;
-        soundSlide.GetComponent<Slider>().value = 1.0f;
+        dataKeeper = DataKeeper.Instance;
+        isFirstTime = true;
+        if (isFirstTime && UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            musicSlide.GetComponent<Slider>().value = 1.0f;
+            isFirstTime = false;
+        }
+        else
+        {
+            musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
+        }
+
+        soundSlide.GetComponent<Slider>().value = dataKeeper.soundVolume;
+    }
+
+    public void Update()
+    {
+
+        musicVolumeLevel = musicSlide.GetComponent<Slider>().value;
+        soundVolumeLevel = soundSlide.GetComponent<Slider>().value;
     }
 
     public void OpenOptionsPanel()

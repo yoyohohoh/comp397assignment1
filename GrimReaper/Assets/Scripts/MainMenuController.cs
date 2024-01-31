@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -10,8 +11,18 @@ public class MainMenuController : MonoBehaviour
 
     public void Start()
     {
-        menu.SetActive(false);
-        options.SetActive(false);
+        //if the scene index is 0, then the main menu is active
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            menu.SetActive(false);
+            options.SetActive(false);
+        }
+        else
+        {
+            //menu.SetActive(true);
+            options.SetActive(true);
+        }
+        
     }
     public void OpenMenu()
     {
