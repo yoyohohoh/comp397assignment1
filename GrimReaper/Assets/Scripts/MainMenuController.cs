@@ -11,18 +11,17 @@ public class MainMenuController : MonoBehaviour
 
     public void Start()
     {
-        //if the scene index is 0, then the main menu is active
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+
+        if (SceneManager.GetActiveScene().name == "GameOver" || SceneManager.GetActiveScene().name == "GameWin")
+        {
+            options.SetActive(true);
+        }
+        else
         {
             menu.SetActive(false);
             options.SetActive(false);
         }
-        else
-        {
-            //menu.SetActive(true);
-            options.SetActive(true);
-        }
-        
+
     }
     public void OpenMenu()
     {
