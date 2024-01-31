@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _groundRadius = 0.5f;
     [SerializeField] LayerMask _groundMask;
     [SerializeField] bool _isGrounded;
+    
+    //Private variables
+    private Inventory inventory;
+    [SerializeField] private UI_Inventory uiInventory;
 
     void Awake()
     {
@@ -43,6 +47,10 @@ public class PlayerController : MonoBehaviour
 
         //Jump when pressing key
         _inputs.Player.Jump.performed += context => Jump();
+
+        //inventory progress
+        //inventory = new Inventory();
+        //uiInventory.SetInventory(inventory);
     }
 
     void FixedUpdate()
