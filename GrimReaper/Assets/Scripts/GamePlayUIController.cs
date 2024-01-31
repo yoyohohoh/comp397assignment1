@@ -9,11 +9,14 @@ public class GamePlayUIController : MonoBehaviour
     [SerializeField] GameObject saveMsg;
     [SerializeField] Button saveBtn;
 
+    [SerializeField] GameObject inventory;
+
 
     public void Start()
     {
         pauseMsg.SetActive(false);
         saveMsg.SetActive(false);
+        inventory.SetActive(false);
     }
 
     public void PauseGame()
@@ -29,7 +32,7 @@ public class GamePlayUIController : MonoBehaviour
     public void SaveGame()
     {
         saveMsg.SetActive(true);
-        //saveBtn button color change to normal
+        saveMsg.SetActive(true);
         saveBtn.interactable = false;
         saveBtn.interactable = true;
         Invoke("CloseSaveMsg", 1);
@@ -39,6 +42,20 @@ public class GamePlayUIController : MonoBehaviour
     {
         saveMsg.SetActive(false);
     }
+
+    public void Inventory()
+    {
+        if (inventory.activeSelf)
+        {
+            inventory.SetActive(false);
+        }
+        else
+        {
+            inventory.SetActive(true);
+        }
+    }
+
+
 
 
 }
