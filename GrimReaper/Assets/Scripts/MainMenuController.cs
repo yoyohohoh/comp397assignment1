@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -10,8 +11,17 @@ public class MainMenuController : MonoBehaviour
 
     public void Start()
     {
-        menu.SetActive(false);
-        options.SetActive(false);
+
+        if (SceneManager.GetActiveScene().name == "GameOver" || SceneManager.GetActiveScene().name == "GameWin")
+        {
+            options.SetActive(true);
+        }
+        else
+        {
+            menu.SetActive(false);
+            options.SetActive(false);
+        }
+
     }
     public void OpenMenu()
     {

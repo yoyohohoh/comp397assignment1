@@ -22,7 +22,6 @@ public class AudioManager : MonoBehaviour
     public void Update()
     {
         MusicVolume();
-        SoundVolume();
     }   
 
     public void MusicVolume()
@@ -30,9 +29,5 @@ public class AudioManager : MonoBehaviour
         music.GetComponent<AudioSource>().volume = musicOption.GetComponent<Slider>().value;
     }
 
-    public void SoundVolume()
-    {
-        //sound.GetComponent<AudioSource>().volume = soundOption.GetComponent<Slider>().value;
-    }
 
 }
