@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,6 @@ public class GamePlayUIController : MonoBehaviour
 
     [SerializeField] GameObject inventory;
 
-
     public void Start()
     {
         pauseMsg.SetActive(false);
@@ -22,6 +22,9 @@ public class GamePlayUIController : MonoBehaviour
     public void PauseGame()
     {
         pauseMsg.SetActive(true);
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPaused = true;
+#endif
     }
 
     public void ResumeGame()
@@ -59,3 +62,4 @@ public class GamePlayUIController : MonoBehaviour
 
 
 }
+

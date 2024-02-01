@@ -27,7 +27,6 @@ public class OptionsController : MonoBehaviour
     [SerializeField] GameObject soundSlide;
     public float musicVolumeLevel;
     public float soundVolumeLevel;
-    public bool isRevisit;
     public bool isOgKey;
     private void Awake()
     {
@@ -49,7 +48,6 @@ public class OptionsController : MonoBehaviour
     {
         
         dataKeeper = DataKeeper.Instance;
-        isRevisit = dataKeeper.isRevisit;
         isOgKey = dataKeeper.isOgKey;
 
         if(!isOgKey)
@@ -60,16 +58,7 @@ public class OptionsController : MonoBehaviour
         {
             SetKeyToOption1();
         }
-        
-        if (!isRevisit && UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            musicSlide.GetComponent<Slider>().value = 1.0f;
-            isRevisit = true;
-        }
-        else
-        {
-            musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
-        }
+        musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
         soundSlide.GetComponent<Slider>().value = dataKeeper.soundVolume;
     }
 
