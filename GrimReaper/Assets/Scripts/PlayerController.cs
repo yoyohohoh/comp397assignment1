@@ -41,9 +41,9 @@ public class PlayerController : MonoBehaviour
         //_inputs.Player.Move.performed += context => SendMessage(context);
 
         //Move when pressing key
-        _inputs.Player.Move.performed += context => _move = context.ReadValue<Vector2>();
+        _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
         //Stop when not pressing key, otherwise player will keep moving to the last direciton
-        _inputs.Player.Move.canceled += context => _move = Vector2.zero;
+        _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
 
         //Jump when pressing key
         _inputs.Player.Jump.performed += context => Jump();
