@@ -28,6 +28,7 @@ public class OptionsController : MonoBehaviour
     public float musicVolumeLevel;
     public float soundVolumeLevel;
     public bool isRevisit;
+    public bool isOgKey;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -49,6 +50,7 @@ public class OptionsController : MonoBehaviour
         SetKeyToOption1();
         dataKeeper = DataKeeper.Instance;
         isRevisit = dataKeeper.isRevisit;
+        isOgKey = dataKeeper.isOgKey;
         
         if (!isRevisit && UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
         {
@@ -59,7 +61,6 @@ public class OptionsController : MonoBehaviour
         {
             musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
         }
-        //musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
         soundSlide.GetComponent<Slider>().value = dataKeeper.soundVolume;
     }
 
@@ -87,6 +88,7 @@ public class OptionsController : MonoBehaviour
         keyOption1Off.SetActive(false);
         keyOption2On.SetActive(false);
         keyOption2Off.SetActive(true);
+        isOgKey = true;
     }
 
     public void SetKeyToOption2()
@@ -95,6 +97,7 @@ public class OptionsController : MonoBehaviour
         keyOption1Off.SetActive(true);
         keyOption2On.SetActive(true);
         keyOption2Off.SetActive(false);
+        isOgKey = false;
     }
 
     public void SwitchKey()

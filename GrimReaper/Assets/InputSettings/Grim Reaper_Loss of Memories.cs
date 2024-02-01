@@ -64,6 +64,15 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""FireA"",
+                    ""type"": ""Button"",
+                    ""id"": ""dcbecfb8-e92a-48eb-9892-db800f764e4b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""MoveA"",
                     ""type"": ""Value"",
                     ""id"": ""d7265c5f-adc1-4d23-8a74-8668b6e1a420"",
@@ -80,6 +89,15 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FireB"",
+                    ""type"": ""Button"",
+                    ""id"": ""88098990-ef54-4383-bd0c-2e0098291cb3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -500,6 +518,116 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
                     ""action"": ""MoveB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7329e822-cfba-4637-b0d1-741e33290573"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""FireA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd2f7fd2-8bd7-4b36-b670-9c1556426c89"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""FireA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1a79e17-1b56-4cec-9601-8dd009cc5fb3"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""FireA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99e832a3-1c56-4e19-a39d-c8f23c3853b1"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""FireA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""101d3352-2f6f-4d98-a288-2bd5d26b8bc5"",
+                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""FireA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58e50f5c-d48d-46f5-b7ed-0229111f94f9"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""FireB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33089f60-7d34-49ef-89f8-cc57039df855"",
+                    ""path"": ""<Keyboard>/#(F)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""FireB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1284f97-a06d-4f53-89f7-4d6095508607"",
+                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""FireB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a53c5cfe-fa1d-420a-93ce-1c9d38a0f9db"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""FireB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6fb22d1b-3dae-44ee-84dd-0a00778c432e"",
+                    ""path"": ""<XRController>/{PrimaryAction}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""FireB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -573,8 +701,10 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_FireA = m_Player.FindAction("FireA", throwIfNotFound: true);
         m_Player_MoveA = m_Player.FindAction("MoveA", throwIfNotFound: true);
         m_Player_MoveB = m_Player.FindAction("MoveB", throwIfNotFound: true);
+        m_Player_FireB = m_Player.FindAction("FireB", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -640,8 +770,10 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_FireA;
     private readonly InputAction m_Player_MoveA;
     private readonly InputAction m_Player_MoveB;
+    private readonly InputAction m_Player_FireB;
     public struct PlayerActions
     {
         private @GrimReaper_LossofMemories m_Wrapper;
@@ -650,8 +782,10 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @FireA => m_Wrapper.m_Player_FireA;
         public InputAction @MoveA => m_Wrapper.m_Player_MoveA;
         public InputAction @MoveB => m_Wrapper.m_Player_MoveB;
+        public InputAction @FireB => m_Wrapper.m_Player_FireB;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -673,12 +807,18 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @FireA.started += instance.OnFireA;
+            @FireA.performed += instance.OnFireA;
+            @FireA.canceled += instance.OnFireA;
             @MoveA.started += instance.OnMoveA;
             @MoveA.performed += instance.OnMoveA;
             @MoveA.canceled += instance.OnMoveA;
             @MoveB.started += instance.OnMoveB;
             @MoveB.performed += instance.OnMoveB;
             @MoveB.canceled += instance.OnMoveB;
+            @FireB.started += instance.OnFireB;
+            @FireB.performed += instance.OnFireB;
+            @FireB.canceled += instance.OnFireB;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -695,12 +835,18 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @FireA.started -= instance.OnFireA;
+            @FireA.performed -= instance.OnFireA;
+            @FireA.canceled -= instance.OnFireA;
             @MoveA.started -= instance.OnMoveA;
             @MoveA.performed -= instance.OnMoveA;
             @MoveA.canceled -= instance.OnMoveA;
             @MoveB.started -= instance.OnMoveB;
             @MoveB.performed -= instance.OnMoveB;
             @MoveB.canceled -= instance.OnMoveB;
+            @FireB.started -= instance.OnFireB;
+            @FireB.performed -= instance.OnFireB;
+            @FireB.canceled -= instance.OnFireB;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -769,7 +915,9 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
         void OnLook(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnFireA(InputAction.CallbackContext context);
         void OnMoveA(InputAction.CallbackContext context);
         void OnMoveB(InputAction.CallbackContext context);
+        void OnFireB(InputAction.CallbackContext context);
     }
 }

@@ -421,8 +421,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicVolume: 0
   soundVolume: 0
-  musicSlide: 0
-  soundSlide: 0
+  isRevisit: 0
+  isOgKey: 1
 --- !u!4 &1910686615
 Transform:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 {
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
+    bool isOgKey;
+    DataKeeper dataKeeper;
 
     [Header("Character Controller")]
     [SerializeField] CharacterController _controller;
@@ -39,14 +41,24 @@ public class PlayerController : MonoBehaviour
 
         //Debug for player location
         //_inputs.Player.Move.performed += context => SendMessage(context);
+        isOgKey = DataKeeper.Instance.isOgKey;
+        Debug.Log("PlayerController say " + isOgKey);
+        if(isOgKey)
+        {
+            _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
+            _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
+            _inputs.Player.Jump.performed += context => Jump();
+            _inputs.Player.FireA.performed += context => Fire();
+        }
+        else
+        {
+            _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
+            _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
+            _inputs.Player.Jump.performed += context => Jump();
+            _inputs.Player.FireB.performed += context => Fire();
+        }
 
-        //Move when pressing key
-        _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
-        //Stop when not pressing key, otherwise player will keep moving to the last direciton
-        _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
-
-        //Jump when pressing key
-        _inputs.Player.Jump.performed += context => Jump();
+        
 
         //inventory progress
         //inventory = new Inventory();
@@ -80,6 +92,11 @@ public class PlayerController : MonoBehaviour
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
     }
+
+    void Fire()
+    {
+        Debug.Log("Fire");
+    }    
 
     private void SendMessage(InputAction.CallbackContext context)
     {
