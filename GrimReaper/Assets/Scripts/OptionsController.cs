@@ -47,10 +47,19 @@ public class OptionsController : MonoBehaviour
 
     public void Start()
     {
-        SetKeyToOption1();
+        
         dataKeeper = DataKeeper.Instance;
         isRevisit = dataKeeper.isRevisit;
         isOgKey = dataKeeper.isOgKey;
+
+        if(!isOgKey)
+        {
+            SetKeyToOption2();
+        }
+        else
+        {
+            SetKeyToOption1();
+        }
         
         if (!isRevisit && UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
         {
@@ -66,7 +75,7 @@ public class OptionsController : MonoBehaviour
 
     public void Update()
     {
-
+        isOgKey = dataKeeper.isOgKey;
         musicVolumeLevel = musicSlide.GetComponent<Slider>().value;
         soundVolumeLevel = soundSlide.GetComponent<Slider>().value;
     }

@@ -41,28 +41,57 @@ public class PlayerController : MonoBehaviour
 
         //Debug for player location
         //_inputs.Player.Move.performed += context => SendMessage(context);
-        isOgKey = DataKeeper.Instance.isOgKey;
-        Debug.Log("PlayerController say " + isOgKey);
-        if(isOgKey)
-        {
-            _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
-            _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
-            _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireA.performed += context => Fire();
-        }
-        else
-        {
-            _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
-            _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
-            _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireB.performed += context => Fire();
-        }
+        //isOgKey = DataKeeper.Instance.isOgKey;
+        //Debug.Log("PlayerController say " + isOgKey);
+        //if(!isOgKey)
+        //{
+        //    _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
+        //    _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
+        //    _inputs.Player.Jump.performed += context => Jump();
+        //    _inputs.Player.FireB.performed += context => Fire();
+        //}
+        //else
+        //{
+        //    _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
+        //    _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
+        //    _inputs.Player.Jump.performed += context => Jump();
+        //    _inputs.Player.FireA.performed += context => Fire();
+        //}
 
         
 
         //inventory progress
         //inventory = new Inventory();
         //uiInventory.SetInventory(inventory);
+    }
+    private void Update()
+    {
+        isOgKey = DataKeeper.Instance.isOgKey;
+        if (!isOgKey)
+        {
+            Debug.Log("PlayerController say Move B " + isOgKey);
+            _inputs.Player.MoveB.Enable();
+            _inputs.Player.FireB.Enable();
+            _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
+            _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
+            _inputs.Player.Jump.performed += context => Jump();
+            _inputs.Player.FireB.performed += context => Fire();
+            _inputs.Player.MoveA.Disable();
+            _inputs.Player.FireA.Disable();
+        }
+        else
+        {
+            Debug.Log("PlayerController say Move A " + isOgKey);
+            _inputs.Player.MoveA.Enable();
+            _inputs.Player.FireA.Enable();
+            _inputs.Player.FireA.Enable();
+            _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
+            _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
+            _inputs.Player.Jump.performed += context => Jump();
+            _inputs.Player.FireA.performed += context => Fire();
+            _inputs.Player.MoveB.Disable();
+            _inputs.Player.FireB.Disable();
+        }
     }
 
     void FixedUpdate()
