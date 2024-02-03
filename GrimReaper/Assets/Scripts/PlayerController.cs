@@ -74,26 +74,34 @@ public class PlayerController : MonoBehaviour
     {
         if (projectilePrefab != null)
         {
-            // Calculate the spawn position on the left side of the player
+            // Calculate the spawn position on the right side of the player
             Vector3 spawnPosition = transform.position + transform.right * 1.0f;
 
-            // Instantiate the projectile with the player's forward direction as the rotation
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(transform.forward));
+            // Determine the movement direction based on player input
+            float horizontalInput = Input.GetAxis("Horizontal");
+            Vector3 movementDirection = new Vector3(horizontalInput, 0f, 0f).normalized;
+
+            // Calculate the forward direction based on the movement direction
+            Vector3 forwardDirection = movementDirection.magnitude > 0f ? movementDirection : transform.forward;
+
+            // Instantiate the projectile with the calculated forward direction as the rotation
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(forwardDirection));
 
             // Get the Projectile component from the instantiated projectile
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
 
             if (projectileComponent != null)
             {
-                // Set the velocity of the projectile based on the player's right direction and speed
                 Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
                 if (projectileRigidbody != null)
                 {
-                    projectileRigidbody.velocity = transform.right * projectileComponent.speed;
+                    projectileRigidbody.velocity = forwardDirection * projectileComponent.speed;
                 }
             }
         }
     }
+
+
 
 }
 
