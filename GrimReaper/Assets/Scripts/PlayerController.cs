@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Scripting.APIUpdating;
 
-//To make sure the object contains the required components
 [RequireComponent(typeof(CharacterController))]
-
 public class PlayerController : MonoBehaviour
 {
     GrimReaper_LossofMemories _inputs;
@@ -26,10 +22,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _groundRadius = 0.5f;
     [SerializeField] LayerMask _groundMask;
     [SerializeField] bool _isGrounded;
+
+    [Header("Shooting")]
+    [SerializeField] GameObject projectilePrefab;
     
-    //Private variables
-    private Inventory inventory;
-    [SerializeField] private UI_Inventory uiInventory;
 
     void Awake()
     {
@@ -37,20 +33,13 @@ public class PlayerController : MonoBehaviour
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
 
-        //Debug for player location
-        //_inputs.Player.Move.performed += context => SendMessage(context);
-
-        //Move when pressing key
         _inputs.Player.Move.performed += context => _move = context.ReadValue<Vector2>();
-        //Stop when not pressing key, otherwise player will keep moving to the last direciton
         _inputs.Player.Move.canceled += context => _move = Vector2.zero;
 
-        //Jump when pressing key
         _inputs.Player.Jump.performed += context => Jump();
 
-        //inventory progress
-        //inventory = new Inventory();
-        //uiInventory.SetInventory(inventory);
+        // New: Handle shooting
+        _inputs.Player.Fire.performed += context => Shoot();
     }
 
     void FixedUpdate()
@@ -66,7 +55,6 @@ public class PlayerController : MonoBehaviour
         _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -81,9 +69,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SendMessage(InputAction.CallbackContext context)
+
+    void Shoot()
     {
-        Debug.Log($"Move Performed x = {context.ReadValue<Vector2>().x}, y = {context.ReadValue<Vector2>().y}");
+        if (projectilePrefab != null)
+        {
+            // Calculate the spawn position on the left side of the player
+            Vector3 spawnPosition = transform.position + transform.right * 1.0f;
+
+            // Instantiate the projectile with the player's forward direction as the rotation
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(transform.forward));
+
+            // Get the Projectile component from the instantiated projectile
+            Projectile projectileComponent = projectile.GetComponent<Projectile>();
+
+            if (projectileComponent != null)
+            {
+                // Set the velocity of the projectile based on the player's right direction and speed
+                Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+                if (projectileRigidbody != null)
+                {
+                    projectileRigidbody.velocity = transform.right * projectileComponent.speed;
+                }
+            }
+        }
     }
 
 }
+
+
