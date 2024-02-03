@@ -23,44 +23,46 @@ public class MainMenuController : MonoBehaviour
         }
 
     }
+
     public void OpenMenu()
     {
-        // Open menu
+        SoundController.instance.Play("Click");
         menu.SetActive(true);
     }
 
     public void CloseMenu()
     {
-        // Close menu
+        SoundController.instance.Play("Click");
         menu.SetActive(false);
     }
 
     public void NewGame()
     {
-        // New game
+        SoundController.instance.Play("Click");
         SceneManager.LoadScene(1);
     }
 
     public void LoadGame()
     {
         // Load game
+        SoundController.instance.Play("Click");
     }
 
     public void OpenOptions()
     {
-        // Open options menu
+        SoundController.instance.Play("Click");
         options.SetActive(true);
     }
 
     public void CloseOptions()
     {
-        // Close options menu
+        SoundController.instance.Play("Click");
         options.SetActive(false);
     }
 
     public void ExitGame()
     {
-        // Exit
+        SoundController.instance.Play("Click");
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

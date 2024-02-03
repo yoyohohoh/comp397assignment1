@@ -37,6 +37,7 @@ public class GamePlayUIController : MonoBehaviour
 
     public void PauseGame()
     {
+        SoundController.instance.Play("Click");
         pauseMsg.SetActive(true);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPaused = true;
@@ -45,11 +46,13 @@ public class GamePlayUIController : MonoBehaviour
 
     public void ResumeGame()
     {
+        SoundController.instance.Play("Click");
         pauseMsg.SetActive(false);
     }
 
     public void SaveGame()
     {
+        SoundController.instance.Play("Click");
         saveMsg.SetActive(true);
         saveMsg.SetActive(true);
         saveBtn.interactable = false;
@@ -64,6 +67,7 @@ public class GamePlayUIController : MonoBehaviour
 
     public void Inventory()
     {
+        SoundController.instance.Play("Click");
         if (inventory.activeSelf)
         {
             inventory.SetActive(false);

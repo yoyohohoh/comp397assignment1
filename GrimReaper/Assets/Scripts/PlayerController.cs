@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
     void Fire()
     {
         Debug.Log("Fire");
+        SoundController.instance.Play("Attack");
 
     }
 
@@ -117,6 +118,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Debug.Log("Player hit by enemy");
+            SoundController.instance.Play("EnemyAttack");
             GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;
             //connect to datakeeper (stage 3)
         }

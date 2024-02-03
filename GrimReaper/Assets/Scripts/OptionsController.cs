@@ -71,12 +71,12 @@ public class OptionsController : MonoBehaviour
 
     public void OpenOptionsPanel()
     {
-        // Close options menu
+        SoundController.instance.Play("Click");
         optionsPanel.SetActive(true);
     }
     public void CloseOptionsPanel()
     {
-        // Close options menu
+        SoundController.instance.Play("Click");
         optionsPanel.SetActive(false);
     }
 
@@ -99,7 +99,8 @@ public class OptionsController : MonoBehaviour
     }
 
     public void SwitchKey()
-    {         
+    {
+        SoundController.instance.Play("Click");
         if (keyOption1On.activeSelf)
         {
             SetKeyToOption2();

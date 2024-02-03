@@ -11,6 +11,7 @@ public class PickedUpItem : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            SoundController.instance.Play("Item");
             //if the game object name is banana
             if (this.gameObject.name == "Banana")
             {
