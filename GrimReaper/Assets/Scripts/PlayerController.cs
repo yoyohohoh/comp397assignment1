@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Character Controller")]
     [SerializeField] CharacterController _controller;
+    [SerializeField] Vector3 initialPosition;
 
     [Header("Movements")]
     [SerializeField] float _speed;
@@ -39,6 +40,13 @@ public class PlayerController : MonoBehaviour
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
 
+        
+
+    }
+
+    void Start()
+    {
+        InitiatePlayerPosition();
     }
 
     private void Update()
@@ -91,6 +99,13 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(_groundCheck.position, _groundRadius);
     }
 
+    void InitiatePlayerPosition()
+    {
+        initialPosition = new Vector3();
+        _controller.enabled = false;
+        transform.position = initialPosition;
+        _controller.enabled = true;
+    }
     void Jump()
     {
         if (_isGrounded)
