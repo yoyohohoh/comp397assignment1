@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.UI;
 
 //To make sure the object contains the required components
 [RequireComponent(typeof(CharacterController))]
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Vector2 _move;
     bool isOgKey;
     DataKeeper dataKeeper;
+    GamePlayUIController gamePlayUIController;
 
     [Header("Character Controller")]
     [SerializeField] CharacterController _controller;
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _groundRadius = 0.5f;
     [SerializeField] LayerMask _groundMask;
     [SerializeField] bool _isGrounded;
-    
+
     //Private variables
     private Inventory inventory;
     [SerializeField] private UI_Inventory uiInventory;
@@ -39,31 +41,9 @@ public class PlayerController : MonoBehaviour
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
 
-        //Debug for player location
-        //_inputs.Player.Move.performed += context => SendMessage(context);
-        //isOgKey = DataKeeper.Instance.isOgKey;
-        //Debug.Log("PlayerController say " + isOgKey);
-        //if(!isOgKey)
-        //{
-        //    _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
-        //    _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
-        //    _inputs.Player.Jump.performed += context => Jump();
-        //    _inputs.Player.FireB.performed += context => Fire();
-        //}
-        //else
-        //{
-        //    _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
-        //    _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
-        //    _inputs.Player.Jump.performed += context => Jump();
-        //    _inputs.Player.FireA.performed += context => Fire();
-        //}
 
-        
-
-        //inventory progress
-        //inventory = new Inventory();
-        //uiInventory.SetInventory(inventory);
     }
+
     private void Update()
     {
         isOgKey = DataKeeper.Instance.isOgKey;
@@ -125,11 +105,20 @@ public class PlayerController : MonoBehaviour
     void Fire()
     {
         Debug.Log("Fire");
-    }    
+    }
 
     private void SendMessage(InputAction.CallbackContext context)
     {
         Debug.Log($"Move Performed x = {context.ReadValue<Vector2>().x}, y = {context.ReadValue<Vector2>().y}");
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Player hit by enemy");
+            GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;
+            //not yet connected to datakeeper
+        }
+    }
 }

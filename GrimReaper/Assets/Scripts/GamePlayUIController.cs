@@ -6,11 +6,27 @@ using UnityEngine.UI;
 
 public class GamePlayUIController : MonoBehaviour
 {
+    public static GamePlayUIController Instance;
+
+
     [SerializeField] GameObject pauseMsg;
     [SerializeField] GameObject saveMsg;
     [SerializeField] Button saveBtn;
+    public Slider health;
 
     [SerializeField] GameObject inventory;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+    }
 
     public void Start()
     {
