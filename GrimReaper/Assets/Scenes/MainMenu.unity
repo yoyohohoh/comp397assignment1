@@ -421,7 +421,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicVolume: 1
   soundVolume: 0
-  isRevisit: 0
   isOgKey: 1
 --- !u!4 &1910686615
 Transform:
@@ -446,6 +445,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 188027544157085198, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
     - target: {fileID: 949311324703837929, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -490,6 +493,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3933915975609908624, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: soundMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 13aab49f6c64bb940bc98e4085713277, type: 2}
     - target: {fileID: 3933915975609908624, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
       propertyPath: musicOption
       value: 

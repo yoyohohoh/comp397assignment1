@@ -10,8 +10,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] GameObject sound;
     [SerializeField] GameObject musicOption;
     [SerializeField] GameObject soundOption;
+    public AudioMixer soundMixer;
     public float musicVolumeLevel;
     public float soundVolumeLevel;
+
 
     public void Start()
     {
@@ -22,6 +24,7 @@ public class AudioManager : MonoBehaviour
     public void Update()
     {
         MusicVolume();
+        SoundVolume();
     }   
 
     public void MusicVolume()
@@ -29,5 +32,9 @@ public class AudioManager : MonoBehaviour
         music.GetComponent<AudioSource>().volume = musicOption.GetComponent<Slider>().value;
     }
 
+    public void SoundVolume()
+    {
+        soundMixer.SetFloat("musicVol", soundOption.GetComponent<Slider>().value);
+    }
 
 }

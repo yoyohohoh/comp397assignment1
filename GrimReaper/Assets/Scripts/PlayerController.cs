@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
     bool isOgKey;
-    DataKeeper dataKeeper;
-    GamePlayUIController gamePlayUIController;
+
 
     [Header("Character Controller")]
     [SerializeField] CharacterController _controller;
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
-
 
     }
 
@@ -98,6 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isGrounded)
         {
+            SoundController.instance.Play("Jump");
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
     }
@@ -105,6 +104,7 @@ public class PlayerController : MonoBehaviour
     void Fire()
     {
         Debug.Log("Fire");
+
     }
 
     private void SendMessage(InputAction.CallbackContext context)
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Player hit by enemy");
             GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;
-            //not yet connected to datakeeper
+            //connect to datakeeper (stage 3)
         }
     }
 }
