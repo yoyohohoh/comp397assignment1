@@ -30,9 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _groundMask;
     [SerializeField] bool _isGrounded;
 
-    //Private variables
-    private Inventory inventory;
-    [SerializeField] private UI_Inventory uiInventory;
+    [Header("Shooting")]
+    [SerializeField] GameObject projectilePrefab;
 
     void Awake()
     {
@@ -53,7 +52,7 @@ public class PlayerController : MonoBehaviour
             _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
             _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
             _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireB.performed += context => Fire();
+            _inputs.Player.FireB.performed += context => Shoot();
             _inputs.Player.MoveA.Disable();
             _inputs.Player.FireA.Disable();
         }
@@ -66,7 +65,7 @@ public class PlayerController : MonoBehaviour
             _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
             _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
             _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireA.performed += context => Fire();
+            _inputs.Player.FireA.performed += context => Shoot();
             _inputs.Player.MoveB.Disable();
             _inputs.Player.FireB.Disable();
         }
@@ -101,10 +100,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Fire()
+    void Shoot()
     {
-        Debug.Log("Fire");
+        Debug.Log("Shoot");
         SoundController.instance.Play("Attack");
+        if (projectilePrefab != null)
+        {
+            // Calculate the spawn position on the right side of the player
+            Vector3 spawnPosition = transform.position + transform.right * 1.0f;
+
+            // Determine the movement direction based on player input
+            float horizontalInput = Input.GetAxis("Horizontal");
+            Vector3 movementDirection = new Vector3(horizontalInput, 0f, 0f).normalized;
+
+            // Calculate the forward direction based on the movement direction
+            Vector3 forwardDirection = movementDirection.magnitude > 0f ? movementDirection : transform.forward;
+
+            // Instantiate the projectile with the calculated forward direction as the rotation
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(forwardDirection));
+
+            // Get the Projectile component from the instantiated projectile
+            //Projectile projectileComponent = projectile.GetComponent<Projectile>();
+
+            //if (projectileComponent != null)
+            //{
+            //    Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+            //    if (projectileRigidbody != null)
+            //    {
+            //        projectileRigidbody.velocity = forwardDirection * projectileComponent.speed;
+            //    }
+            //}
+        }
 
     }
 

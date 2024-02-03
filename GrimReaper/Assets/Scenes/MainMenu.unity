@@ -448,7 +448,11 @@ PrefabInstance:
     - target: {fileID: 188027544157085198, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 0643908ea2a90c341a1f488fb302af76, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 188027544157085198, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 949311324703837929, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -505,6 +509,30 @@ PrefabInstance:
       propertyPath: soundOption
       value: 
       objectReference: {fileID: 382426735}
+    - target: {fileID: 6281282283606266977, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: sounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281282283606266977, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: sounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 25f55d04ff7127046b891b50f6b8a1fe, type: 3}
+    - target: {fileID: 6281282283606266977, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: sounds.Array.data[0].name
+      value: Click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281282283606266977, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: sounds.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281282283606266977, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281282283606266977, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+      propertyPath: sounds.Array.data[0].mixerGroup
+      value: 
+      objectReference: {fileID: -4716659566119679468, guid: 13aab49f6c64bb940bc98e4085713277, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
