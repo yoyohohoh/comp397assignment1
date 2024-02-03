@@ -22,6 +22,7 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // Check if the other object has the EnemyHealth component
+            Debug.Log("Player hit the enemy");
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {

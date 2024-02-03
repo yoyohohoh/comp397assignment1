@@ -1,15 +1,23 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Scripting.APIUpdating;
+using UnityEngine.UI;
 
+//To make sure the object contains the required components
 [RequireComponent(typeof(CharacterController))]
+
 public class PlayerController : MonoBehaviour
 {
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
+    bool isOgKey;
+
 
     [Header("Character Controller")]
     [SerializeField] CharacterController _controller;
+    [SerializeField] Vector3 initialPosition;
 
     [Header("Movements")]
     [SerializeField] float _speed;
@@ -25,7 +33,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] GameObject projectilePrefab;
-    
 
     void Awake()
     {
@@ -33,13 +40,43 @@ public class PlayerController : MonoBehaviour
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
 
-        _inputs.Player.Move.performed += context => _move = context.ReadValue<Vector2>();
-        _inputs.Player.Move.canceled += context => _move = Vector2.zero;
 
-        _inputs.Player.Jump.performed += context => Jump();
 
-        // New: Handle shooting
-        _inputs.Player.Fire.performed += context => Shoot();
+    }
+
+    void Start()
+    {
+        InitiatePlayerPosition();
+    }
+
+    private void Update()
+    {
+        isOgKey = DataKeeper.Instance.isOgKey;
+        if (!isOgKey)
+        {
+            Debug.Log("PlayerController say Move B " + isOgKey);
+            _inputs.Player.MoveB.Enable();
+            _inputs.Player.FireB.Enable();
+            _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
+            _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
+            _inputs.Player.Jump.performed += context => Jump();
+            _inputs.Player.FireB.performed += context => Shoot();
+            _inputs.Player.MoveA.Disable();
+            _inputs.Player.FireA.Disable();
+        }
+        else
+        {
+            Debug.Log("PlayerController say Move A " + isOgKey);
+            _inputs.Player.MoveA.Enable();
+            _inputs.Player.FireA.Enable();
+            _inputs.Player.FireA.Enable();
+            _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
+            _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
+            _inputs.Player.Jump.performed += context => Jump();
+            _inputs.Player.FireA.performed += context => Shoot();
+            _inputs.Player.MoveB.Disable();
+            _inputs.Player.FireB.Disable();
+        }
     }
 
     void FixedUpdate()
@@ -55,23 +92,33 @@ public class PlayerController : MonoBehaviour
         _controller.Move(_velocity * Time.fixedDeltaTime);
     }
 
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_groundCheck.position, _groundRadius);
     }
 
+    void InitiatePlayerPosition()
+    {
+        initialPosition = new Vector3();
+        _controller.enabled = false;
+        transform.position = initialPosition;
+        _controller.enabled = true;
+    }
     void Jump()
     {
         if (_isGrounded)
         {
+            SoundController.instance.Play("Jump");
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
     }
 
-
     void Shoot()
     {
+        Debug.Log("Shoot");
+        SoundController.instance.Play("Attack");
         if (projectilePrefab != null)
         {
             // Calculate the spawn position on the right side of the player
@@ -99,10 +146,22 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
     }
 
+    private void SendMessage(InputAction.CallbackContext context)
+    {
+        Debug.Log($"Move Performed x = {context.ReadValue<Vector2>().x}, y = {context.ReadValue<Vector2>().y}");
+    }
 
-
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Player hit by enemy");
+            SoundController.instance.Play("EnemyAttack");
+            GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;
+            //connect to datakeeper (stage 3)
+        }
+    }
 }
-
-

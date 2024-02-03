@@ -9,7 +9,7 @@ public class DataKeeper : MonoBehaviour
 
     public float musicVolume;
     public float soundVolume;
-    public bool isRevisit;
+    public bool isOgKey;
 
     private OptionsController optionsController;
     private float musicSlide;
@@ -35,12 +35,10 @@ public class DataKeeper : MonoBehaviour
 
     public void FixedUpdate()
     {
-        Debug.Log("Is Revisit: " + isRevisit);
-        Debug.Log("Music: " + musicVolume + "; Sound: " + soundSlide);
         optionsController = OptionsController.Instance;
         optionsController.musicVolumeLevel = DataKeeper.Instance.musicVolume;
         optionsController.soundVolumeLevel = DataKeeper.Instance.soundVolume;
-        optionsController.isRevisit = DataKeeper.Instance.isRevisit;
+        optionsController.isOgKey = DataKeeper.Instance.isOgKey;
     }
 
     public void Update()
@@ -48,10 +46,7 @@ public class DataKeeper : MonoBehaviour
 
         musicSlide = optionsController.musicVolumeLevel;
         soundSlide = optionsController.soundVolumeLevel;
-        if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            isRevisit = true;
-        }
+        isOgKey = optionsController.isOgKey;
         
         SetMusicVolume(musicSlide);
         SetSoundVolume(soundSlide);
@@ -66,5 +61,6 @@ public class DataKeeper : MonoBehaviour
     {
         DataKeeper.Instance.soundVolume = volume;
     }
+
 
 }

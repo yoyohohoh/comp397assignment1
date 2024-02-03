@@ -27,7 +27,7 @@ public class OptionsController : MonoBehaviour
     [SerializeField] GameObject soundSlide;
     public float musicVolumeLevel;
     public float soundVolumeLevel;
-    public bool isRevisit;
+    public bool isOgKey;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -46,38 +46,37 @@ public class OptionsController : MonoBehaviour
 
     public void Start()
     {
-        SetKeyToOption1();
-        dataKeeper = DataKeeper.Instance;
-        isRevisit = dataKeeper.isRevisit;
         
-        if (!isRevisit && UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 0)
+        dataKeeper = DataKeeper.Instance;
+        isOgKey = dataKeeper.isOgKey;
+
+        if(!isOgKey)
         {
-            musicSlide.GetComponent<Slider>().value = 1.0f;
-            isRevisit = true;
+            SetKeyToOption2();
         }
         else
         {
-            musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
+            SetKeyToOption1();
         }
-        //musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
+        musicSlide.GetComponent<Slider>().value = dataKeeper.musicVolume;
         soundSlide.GetComponent<Slider>().value = dataKeeper.soundVolume;
     }
 
     public void Update()
     {
-
+        isOgKey = dataKeeper.isOgKey;
         musicVolumeLevel = musicSlide.GetComponent<Slider>().value;
         soundVolumeLevel = soundSlide.GetComponent<Slider>().value;
     }
 
     public void OpenOptionsPanel()
     {
-        // Close options menu
+        SoundController.instance.Play("Click");
         optionsPanel.SetActive(true);
     }
     public void CloseOptionsPanel()
     {
-        // Close options menu
+        SoundController.instance.Play("Click");
         optionsPanel.SetActive(false);
     }
 
@@ -87,6 +86,7 @@ public class OptionsController : MonoBehaviour
         keyOption1Off.SetActive(false);
         keyOption2On.SetActive(false);
         keyOption2Off.SetActive(true);
+        isOgKey = true;
     }
 
     public void SetKeyToOption2()
@@ -95,10 +95,12 @@ public class OptionsController : MonoBehaviour
         keyOption1Off.SetActive(true);
         keyOption2On.SetActive(true);
         keyOption2Off.SetActive(false);
+        isOgKey = false;
     }
 
     public void SwitchKey()
-    {         
+    {
+        SoundController.instance.Play("Click");
         if (keyOption1On.activeSelf)
         {
             SetKeyToOption2();
