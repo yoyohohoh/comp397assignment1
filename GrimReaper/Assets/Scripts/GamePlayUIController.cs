@@ -39,9 +39,8 @@ public class GamePlayUIController : MonoBehaviour
     {
         SoundController.instance.Play("Click");
         pauseMsg.SetActive(true);
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPaused = true;
-#endif
+        Time.timeScale = 0;
+
     }
 
 //resume game after pause
@@ -49,6 +48,7 @@ public class GamePlayUIController : MonoBehaviour
     {
         SoundController.instance.Play("Click");
         pauseMsg.SetActive(false);
+        Time.timeScale = 1;
     }
 
 //save game
