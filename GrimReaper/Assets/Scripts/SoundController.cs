@@ -30,6 +30,7 @@ public class SoundController : MonoBehaviour
         }
     }
 
+//play sound when other script call this function: SoundController.instance.Play("name of sound");
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

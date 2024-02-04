@@ -46,11 +46,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        //player initial position
         InitiatePlayerPosition();
     }
 
     private void Update()
     {
+        //get data from datakeeper that which key player chose in the previous scene
         isOgKey = DataKeeper.Instance.isOgKey;
         if (!isOgKey)
         {
@@ -158,6 +160,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            //when player touch enemy, player's health will decrease
             Debug.Log("Player hit by enemy");
             SoundController.instance.Play("EnemyAttack");
             GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;

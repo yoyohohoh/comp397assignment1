@@ -27,11 +27,13 @@ public class AudioManager : MonoBehaviour
         SoundVolume();
     }   
 
+    // Slider control for music volume
     public void MusicVolume()
     {        
         music.GetComponent<AudioSource>().volume = musicOption.GetComponent<Slider>().value;
     }
 
+    // Slider control for sound volume
     public void SoundVolume()
     {
         soundMixer.SetFloat("musicVol", soundOption.GetComponent<Slider>().value);

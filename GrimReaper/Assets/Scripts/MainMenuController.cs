@@ -24,42 +24,49 @@ public class MainMenuController : MonoBehaviour
 
     }
 
+// open main menu
     public void OpenMenu()
     {
         SoundController.instance.Play("Click");
         menu.SetActive(true);
     }
 
+//close main menu
     public void CloseMenu()
     {
         SoundController.instance.Play("Click");
         menu.SetActive(false);
     }
 
+//start new game
     public void NewGame()
     {
         SoundController.instance.Play("Click");
         SceneManager.LoadScene(1);
     }
 
+//load saved game
     public void LoadGame()
     {
         // Load game
         SoundController.instance.Play("Click");
     }
 
+//open options panel
     public void OpenOptions()
     {
         SoundController.instance.Play("Click");
         options.SetActive(true);
     }
 
+//close options panel
     public void CloseOptions()
     {
         SoundController.instance.Play("Click");
         options.SetActive(false);
     }
 
+//exit game
     public void ExitGame()
     {
         SoundController.instance.Play("Click");

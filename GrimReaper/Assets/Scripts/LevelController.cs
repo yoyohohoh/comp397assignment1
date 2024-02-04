@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
     GamePlayUIController GamePlayUIController;
     public void Update()
     {
+        //if player lose all the hp, game over
         if (GamePlayUIController.Instance.health.GetComponent<Slider>().value == 0)
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
@@ -17,6 +18,7 @@ public class LevelController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
+        //if player reach the door, go to the next level
         if (collision.gameObject.tag == "Player")
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);

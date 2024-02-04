@@ -43,9 +43,11 @@ public class DataKeeper : MonoBehaviour
 
     public void Update()
     {
-
+        //bgm
         musicSlide = optionsController.musicVolumeLevel;
+        //soundeffect
         soundSlide = optionsController.soundVolumeLevel;
+        //key mapping
         isOgKey = optionsController.isOgKey;
         
         SetMusicVolume(musicSlide);
@@ -53,6 +55,7 @@ public class DataKeeper : MonoBehaviour
 
     }
 
+    // store for music&sound volume from previous scene
     public void SetMusicVolume(float volume)
     {
         DataKeeper.Instance.musicVolume = volume;

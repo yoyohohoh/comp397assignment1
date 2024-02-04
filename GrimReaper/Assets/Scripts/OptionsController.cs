@@ -69,17 +69,21 @@ public class OptionsController : MonoBehaviour
         soundVolumeLevel = soundSlide.GetComponent<Slider>().value;
     }
 
+//open options panel
     public void OpenOptionsPanel()
     {
         SoundController.instance.Play("Click");
         optionsPanel.SetActive(true);
     }
+
+//close options panel
     public void CloseOptionsPanel()
     {
         SoundController.instance.Play("Click");
         optionsPanel.SetActive(false);
     }
 
+//show player chose key option 1 ui
     public void SetKeyToOption1()
     {
         keyOption1On.SetActive(true);
@@ -89,6 +93,7 @@ public class OptionsController : MonoBehaviour
         isOgKey = true;
     }
 
+//show player chose key option 2 ui
     public void SetKeyToOption2()
     {
         keyOption1On.SetActive(false);
@@ -98,6 +103,7 @@ public class OptionsController : MonoBehaviour
         isOgKey = false;
     }
 
+//button for switching between key options
     public void SwitchKey()
     {
         SoundController.instance.Play("Click");

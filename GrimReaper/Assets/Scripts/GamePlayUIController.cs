@@ -44,12 +44,14 @@ public class GamePlayUIController : MonoBehaviour
 #endif
     }
 
+//resume game after pause
     public void ResumeGame()
     {
         SoundController.instance.Play("Click");
         pauseMsg.SetActive(false);
     }
 
+//save game
     public void SaveGame()
     {
         SoundController.instance.Play("Click");
@@ -59,12 +61,13 @@ public class GamePlayUIController : MonoBehaviour
         saveBtn.interactable = true;
         Invoke("CloseSaveMsg", 1);
     }
-
+//close the noti after save game
     public void CloseSaveMsg()
     {
         saveMsg.SetActive(false);
     }
 
+//open&close inventory panel
     public void Inventory()
     {
         SoundController.instance.Play("Click");
