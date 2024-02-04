@@ -533,7 +533,7 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
                 {
                     ""name"": """",
                     ""id"": ""fd2f7fd2-8bd7-4b36-b670-9c1556426c89"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
