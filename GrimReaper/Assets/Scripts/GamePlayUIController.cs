@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,7 @@ public class GamePlayUIController : MonoBehaviour
     public Slider health;
 
     [SerializeField] GameObject inventory;
+    [SerializeField] GameObject minimap;
 
     private void Awake()
     {
@@ -33,6 +36,7 @@ public class GamePlayUIController : MonoBehaviour
         pauseMsg.SetActive(false);
         saveMsg.SetActive(false);
         inventory.SetActive(false);
+        minimap.SetActive(false);
     }
 
     public void PauseGame()
@@ -78,6 +82,20 @@ public class GamePlayUIController : MonoBehaviour
         else
         {
             inventory.SetActive(true);
+        }
+    }
+
+    //open&close minimap panel
+    public void Minimap()
+    {
+        SoundController.instance.Play("Click");
+        if (minimap.activeSelf)
+        {
+            minimap.SetActive(false);
+        }
+        else
+        {
+            minimap.SetActive(true);
         }
     }
 
