@@ -48,7 +48,6 @@ public class OptionsController : MonoBehaviour
         
         dataKeeper = DataKeeper.Instance;
         isOgKey = dataKeeper.isOgKey;
-
         if(!isOgKey)
         {
             SetKeyToOption2();

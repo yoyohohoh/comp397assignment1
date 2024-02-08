@@ -10,6 +10,15 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController _instance;
+    public static PlayerController Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
     bool isOgKey;
@@ -36,12 +45,11 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        _instance = this;
+
         _controller = GetComponent<CharacterController>();
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
-
-
-
     }
 
     void Start()
@@ -101,7 +109,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(_groundCheck.position, _groundRadius);
     }
 
-    void InitiatePlayerPosition()
+    public void InitiatePlayerPosition()
     {
         initialPosition = new Vector3();
         _controller.enabled = false;
@@ -156,15 +164,17 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"Move Performed x = {context.ReadValue<Vector2>().x}, y = {context.ReadValue<Vector2>().y}");
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        Debug.Log("Player touch" + other.name);
+        if (other.gameObject.tag == "Enemy")
         {
             //when player touch enemy, player's health will decrease
             Debug.Log("Player hit by enemy");
             SoundController.instance.Play("EnemyAttack");
-            GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;
+            GamePlayUIController.Instance.UpdateHealth(-1.0f);
             //connect to datakeeper (stage 3)
         }
     }
+
 }
