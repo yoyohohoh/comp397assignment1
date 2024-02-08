@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class LevelController : MonoBehaviour
 {
     GamePlayUIController GamePlayUIController;
+
+    private void Start()
+    {
+
+    }
     public void Update()
     {
         //if player lose all the hp, game over

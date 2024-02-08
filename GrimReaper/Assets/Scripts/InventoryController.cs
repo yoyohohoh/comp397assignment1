@@ -1,22 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class InventoryController : MonoBehaviour
 {
-    public static InventoryController Instance;
-    private void Awake()
+    public static InventoryController _instance;
+    public static InventoryController Instance
     {
-        if (Instance != null)
+        get
         {
-            Destroy(gameObject);
-            return;
+            return _instance;
         }
-
-        Instance = this;
-
     }
     private DataKeeper dataKeeper;
     [SerializeField] public Image banana;
@@ -28,6 +25,11 @@ public class InventoryController : MonoBehaviour
     [SerializeField] public Image cherry;
     [SerializeField] public int cherryCount;
     [SerializeField] public Text cherryText;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {

@@ -21,6 +21,9 @@ public class DataKeeper : MonoBehaviour
     public int cherryAmount;
     private InventoryController inventoryController;
 
+    [Header("Life")]
+    public int lifeAmount;
+    private LifeController lifeController;
 
     private void Awake()
     {
@@ -36,7 +39,6 @@ public class DataKeeper : MonoBehaviour
     }
     public void Start()
     {
-
     }
 
     public void FixedUpdate()
@@ -50,6 +52,9 @@ public class DataKeeper : MonoBehaviour
         inventoryController.bananaCount = DataKeeper.Instance.bananaAmount;
         inventoryController.watermelonCount = DataKeeper.Instance.watermelonAmount;
         inventoryController.cherryCount = DataKeeper.Instance.cherryAmount;
+
+        lifeController = LifeController.Instance;
+        //lifeController.life = DataKeeper.Instance.lifeAmount;
     }
 
     public void Update()
@@ -70,6 +75,8 @@ public class DataKeeper : MonoBehaviour
         watermelonAmount = inventoryController.watermelonCount;
         cherryAmount = inventoryController.cherryCount;
 
+        //life
+        lifeAmount = lifeController.life;
     }
 
     // store for music&sound volume from previous scene
@@ -81,6 +88,7 @@ public class DataKeeper : MonoBehaviour
     {
         DataKeeper.Instance.soundVolume = volume;
     }
+
 
 
 }
