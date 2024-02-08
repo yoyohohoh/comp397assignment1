@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
             //when player touch enemy, player's health will decrease
             Debug.Log("Player hit by enemy");
             SoundController.instance.Play("EnemyAttack");
-            GamePlayUIController.Instance.health.GetComponent<Slider>().value -= 1.0f;
+            GamePlayUIController.Instance.UpdateHealth(-1.0f);
             //connect to datakeeper (stage 3)
         }
     }

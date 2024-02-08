@@ -73,4 +73,35 @@ public class InventoryController : MonoBehaviour
         }
 
     }
+
+    public void useBanana()
+    {
+        if (bananaCount > 0)
+        {
+            SoundController.instance.Play("Click");
+            Debug.Log("Banana used");
+            bananaCount--;
+            GamePlayUIController.Instance.UpdateHealth(1.0f);
+        }
+    }
+    public void useWatermelon()
+    {
+        if (watermelonCount > 0)
+        {
+            SoundController.instance.Play("Click");
+            Debug.Log("Watermelon used");
+            watermelonCount--;
+            GamePlayUIController.Instance.UpdateHealth(1.0f);
+        }
+    }
+    public void useCherry()
+    {
+        if (cherryCount > 0)
+        {
+            SoundController.instance.Play("Click");
+            Debug.Log("Cherry used");
+            cherryCount--;
+            GamePlayUIController.Instance.UpdateHealth(1.0f);
+        }
+    }
 }

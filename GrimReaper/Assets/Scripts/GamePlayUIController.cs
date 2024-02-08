@@ -98,6 +98,11 @@ public class GamePlayUIController : MonoBehaviour
         }
     }
 
+    public void UpdateHealth(float value)
+    {
+        health.GetComponent<Slider>().value += value;
+    }
+
 
 
 
