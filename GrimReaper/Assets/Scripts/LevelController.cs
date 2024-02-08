@@ -13,13 +13,7 @@ public class LevelController : MonoBehaviour
     }
     public void Update()
     {
-        //if player lose all the hp, game over
-        if (GamePlayUIController.Instance.health.GetComponent<Slider>().value == 0)
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
-        }
-        
-    
+
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -28,5 +22,10 @@ public class LevelController : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
+
+    public void LoadNextLevel(int index)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(index);
     }
 }

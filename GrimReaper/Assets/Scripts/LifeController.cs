@@ -32,7 +32,7 @@ public class LifeController : MonoBehaviour
         dataKeeper = DataKeeper.Instance;
         checkLife = GameObject.FindGameObjectsWithTag("Life").Length;
         dataLife = dataKeeper.lifeAmount;
-        if(checkLife > dataLife)
+        if(checkLife > dataLife && dataLife == 0)
         {
             life = checkLife;
         }
@@ -46,7 +46,14 @@ public class LifeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(life)
+        if (GamePlayUIController.Instance.health.GetComponent<Slider>().value == 0)
+        {
+            life--;
+            PlayerController.Instance.InitiatePlayerPosition();
+            GamePlayUIController.Instance.UpdateHealth(100.0f);
+        }
+
+        switch (life)
         {
             case 3:
                 life1.enabled = true;
@@ -62,6 +69,12 @@ public class LifeController : MonoBehaviour
                 life1.enabled = true;
                 life2.enabled = false;
                 life3.enabled = false;
+                break;
+            case 0:
+                life1.enabled = false;
+                life2.enabled = false;
+                life3.enabled = false;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
                 break;
 
         }

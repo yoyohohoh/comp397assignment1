@@ -10,6 +10,15 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController _instance;
+    public static PlayerController Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
     bool isOgKey;
@@ -36,12 +45,11 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        _instance = this;
+
         _controller = GetComponent<CharacterController>();
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
-
-
-
     }
 
     void Start()
@@ -101,7 +109,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(_groundCheck.position, _groundRadius);
     }
 
-    void InitiatePlayerPosition()
+    public void InitiatePlayerPosition()
     {
         initialPosition = new Vector3();
         _controller.enabled = false;
