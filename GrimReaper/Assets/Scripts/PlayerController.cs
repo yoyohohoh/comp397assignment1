@@ -156,9 +156,10 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"Move Performed x = {context.ReadValue<Vector2>().x}, y = {context.ReadValue<Vector2>().y}");
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        Debug.Log("Player touch" + other.name);
+        if (other.gameObject.tag == "Enemy")
         {
             //when player touch enemy, player's health will decrease
             Debug.Log("Player hit by enemy");
@@ -167,4 +168,5 @@ public class PlayerController : MonoBehaviour
             //connect to datakeeper (stage 3)
         }
     }
+
 }

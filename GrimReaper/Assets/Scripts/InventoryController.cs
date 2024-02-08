@@ -6,6 +6,19 @@ using static UnityEditor.Progress;
 
 public class InventoryController : MonoBehaviour
 {
+    public static InventoryController Instance;
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+    }
+    private DataKeeper dataKeeper;
     [SerializeField] public Image banana;
     [SerializeField] public int bananaCount;
     [SerializeField] public Text bananaText;
@@ -15,6 +28,14 @@ public class InventoryController : MonoBehaviour
     [SerializeField] public Image cherry;
     [SerializeField] public int cherryCount;
     [SerializeField] public Text cherryText;
+
+    void Start()
+    {
+        dataKeeper = DataKeeper.Instance;
+        bananaCount = dataKeeper.bananaAmount;
+        watermelonCount = dataKeeper.watermelonAmount;
+        cherryCount = dataKeeper.cherryAmount;
+    }
     void Update()
     {
         colorItem(bananaCount, banana);

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class DataKeeper : MonoBehaviour
 {
     public static DataKeeper Instance;
-
+    [Header("Menu")]
     public float musicVolume;
     public float soundVolume;
     public bool isOgKey;
@@ -14,6 +14,12 @@ public class DataKeeper : MonoBehaviour
     private OptionsController optionsController;
     private float musicSlide;
     private float soundSlide;
+
+    [Header("Inventory")]
+    public int bananaAmount;
+    public int watermelonAmount;
+    public int cherryAmount;
+    private InventoryController inventoryController;
 
 
     private void Awake()
@@ -39,10 +45,16 @@ public class DataKeeper : MonoBehaviour
         optionsController.musicVolumeLevel = DataKeeper.Instance.musicVolume;
         optionsController.soundVolumeLevel = DataKeeper.Instance.soundVolume;
         optionsController.isOgKey = DataKeeper.Instance.isOgKey;
+
+        inventoryController = InventoryController.Instance;
+        inventoryController.bananaCount = DataKeeper.Instance.bananaAmount;
+        inventoryController.watermelonCount = DataKeeper.Instance.watermelonAmount;
+        inventoryController.cherryCount = DataKeeper.Instance.cherryAmount;
     }
 
     public void Update()
     {
+        //menu
         //bgm
         musicSlide = optionsController.musicVolumeLevel;
         //soundeffect
@@ -52,6 +64,11 @@ public class DataKeeper : MonoBehaviour
         
         SetMusicVolume(musicSlide);
         SetSoundVolume(soundSlide);
+
+        //inventory
+        bananaAmount = inventoryController.bananaCount;
+        watermelonAmount = inventoryController.watermelonCount;
+        cherryAmount = inventoryController.cherryCount;
 
     }
 

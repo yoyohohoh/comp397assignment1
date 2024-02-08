@@ -15,22 +15,19 @@ public class PickedUpItem : MonoBehaviour
             //if the game object name is banana
             if (this.gameObject.name == "Banana")
             {
-                banana++;
-                Debug.Log("Banana: " + banana);
+                InventoryController.Instance.bananaCount++;
                 //sent to datakeeper, then show on inventory (stage 3)
             }
             //if the game object name is watermelon
             if (this.gameObject.name == "Watermelon")
             {
-                watermelon++;
-                Debug.Log("Watermelon: " + watermelon);
+                InventoryController.Instance.watermelonCount++;
                 //sent to datakeeper, then show on inventory (stage 3)
             }
             //if the game object name is cherry 
             if (this.gameObject.name == "Cherry")
             {
-                cherry++;
-                Debug.Log("Cherry: " + cherry);
+                InventoryController.Instance.cherryCount++;
                 //sent to datakeeper, then show on inventory (stage 3)
             }
             
