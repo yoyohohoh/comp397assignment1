@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GamePlayUIController : MonoBehaviour
 {
     public static GamePlayUIController Instance;
-
 
     [SerializeField] GameObject pauseMsg;
     [SerializeField] GameObject saveMsg;
@@ -36,6 +36,12 @@ public class GamePlayUIController : MonoBehaviour
         saveMsg.SetActive(false);
         inventory.SetActive(false);
         minimap.SetActive(false);
+        Debug.Log(Application.persistentDataPath + "/MySaveData.txt");
+    }
+
+    private void Update()
+    {
+
     }
 
     public void PauseGame()
@@ -58,11 +64,25 @@ public class GamePlayUIController : MonoBehaviour
     public void SaveGame()
     {
         SoundController.instance.Play("Click");
+        getDataAndSave();
         saveMsg.SetActive(true);
         saveMsg.SetActive(true);
         saveBtn.interactable = false;
         saveBtn.interactable = true;
         Invoke("CloseSaveMsg", 1);
+    }
+
+    public void getDataAndSave()
+    {  
+        int level = SceneManager.GetActiveScene().buildIndex;
+        Transform playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        int life = DataKeeper.Instance.lifeAmount;
+        int banana = DataKeeper.Instance.bananaAmount;
+        int watermelon = DataKeeper.Instance.watermelonAmount;
+        int cherry = DataKeeper.Instance.cherryAmount;
+        int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        Debug.Log(banana);
+        SaveGameManager.Instance().SaveGame(level, playerTransform, life, banana, watermelon, cherry, enemies);
     }
 //close the noti after save game
     public void CloseSaveMsg()
@@ -102,6 +122,8 @@ public class GamePlayUIController : MonoBehaviour
     {
         health.GetComponent<Slider>().value += value;
     }
+
+
 
 
 
