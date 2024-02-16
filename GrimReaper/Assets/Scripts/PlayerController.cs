@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void InitiatePlayerPosition()
     {
-        initialPosition = new Vector3();
+        //initialPosition = new Vector3();
         _controller.enabled = false;
         transform.position = initialPosition;
         _controller.enabled = true;
