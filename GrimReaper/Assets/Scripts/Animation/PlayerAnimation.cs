@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -15,6 +16,8 @@ public class PlayerAnimation : MonoBehaviour
 
     GrimReaper_LossofMemories _inputs;
 
+    [SerializeField] GameObject playerModel;
+
     private void Awake()
     {
         _inputs = new GrimReaper_LossofMemories();
@@ -25,6 +28,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        playerModel = GameObject.FindGameObjectWithTag("PlayerModel");
     }
 
     private void Update()
@@ -63,6 +67,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             isWalking = true;
             anim.SetBool("isWalking", isWalking);
+            Flip();
         }
         else
         {
@@ -80,6 +85,21 @@ public class PlayerAnimation : MonoBehaviour
         {
             isIdle = false;
             anim.SetBool("isIdle", isIdle);
+        }
+    }
+
+    private void Flip()
+    {
+        if (playerModel != null)
+        {
+            if (_inputs.Player.MoveA.ReadValue<Vector2>().x > 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x > 0)
+            {
+                playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            else if (_inputs.Player.MoveA.ReadValue<Vector2>().x < 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x < 0)
+            {
+                playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
         }
     }
 
