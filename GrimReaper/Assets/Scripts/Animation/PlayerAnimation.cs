@@ -10,6 +10,7 @@ public class PlayerAnimation : MonoBehaviour
     private bool isGrounded = false;
     private bool isWalking = false;
     private bool isJumped = false;
+    private bool isAttacking = false;
     private bool isIdle = true;
 
     GrimReaper_LossofMemories _inputs;
@@ -28,8 +29,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
+        
         // Jump
-        if (_inputs.Player.Jump.triggered && isGrounded)
+        if (_inputs.Player.Jump.triggered && isGrounded && !isAttacking)
         {
             isJumped = true;
             anim.SetBool("isJumped", isJumped);
@@ -39,6 +41,18 @@ public class PlayerAnimation : MonoBehaviour
         {
             isJumped = false;
             anim.SetBool("isJumped", isJumped);
+        }
+        
+        // Attack
+        if (_inputs.Player.FireA.triggered || _inputs.Player.FireB.triggered)
+        {
+            isAttacking = true;
+            anim.SetBool("isAttacking", isAttacking);
+        }
+        else
+        {
+            isAttacking = false;
+            anim.SetBool("isAttacking", isAttacking);
         }
 
         // Walk
@@ -57,7 +71,7 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         // Idle
-        if (!isWalking && !isJumped)
+        if (!isWalking && !isJumped && !isAttacking)
         {
             isIdle = true;
             anim.SetBool("isIdle", isIdle);
