@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _gravity = -30.0f;
     [SerializeField] float _jumpHeight = 3.0f;
     [SerializeField] Vector3 _velocity;
+    [SerializeField] float bounceForce = 5.0f; 
+    
 
     [Header("Ground Detection")]
     [SerializeField] Transform _groundCheck;
@@ -40,8 +42,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _groundMask;
     [SerializeField] bool _isGrounded;
 
+    [Header("Bounce Detection")]
+    [SerializeField] public string bounceTag = "BounceObject"; 
+
     [Header("Shooting")]
     [SerializeField] GameObject projectilePrefab;
+
+    
 
     void Awake()
     {
@@ -192,5 +199,14 @@ public class PlayerController : MonoBehaviour
             //connect to datakeeper (stage 3)
         }
     }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag(bounceTag) && _isGrounded)
+        {          
+            _velocity.y = Mathf.Sqrt(bounceForce * -2f * _gravity);
+        }
+    }
+
+
 
 }

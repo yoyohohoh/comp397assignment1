@@ -8,6 +8,8 @@ TagManager:
   - Projectile
   - Enemy
   - Life
+  - BounceObject
+  - PlayerCrow
   layers:
   - Default
   - TransparentFX
