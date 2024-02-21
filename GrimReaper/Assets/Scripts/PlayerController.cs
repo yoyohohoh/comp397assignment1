@@ -90,16 +90,32 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
+    {      
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
         if (_isGrounded && _velocity.y < 0.0f)
         {
             _velocity.y = -2.0f;
         }
-        Vector3 movement = new Vector3(_move.x, 0.0f, _move.y) * _speed * Time.fixedDeltaTime;
+
+        // Create movement vector, keeping Z component as 0
+        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;
+               
         _controller.Move(movement);
+
+        // Apply gravity to Y velocity
         _velocity.y += _gravity * Time.fixedDeltaTime;
-        _controller.Move(_velocity * Time.fixedDeltaTime);
+
+        // Move the player vertically (jumping/falling), without affecting the Z-axis
+        _controller.Move(new Vector3(0, _velocity.y, 0) * Time.fixedDeltaTime);
+
+        //Fixed Z position
+        Vector3 position = transform.position;
+        position.z = initialPosition.z; 
+        transform.position = position;
+
+
+
+
     }
 
 
