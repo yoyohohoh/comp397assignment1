@@ -17,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     GrimReaper_LossofMemories _inputs;
 
     [SerializeField] GameObject playerModel;
+    [SerializeField] GameObject playerMarker;
 
     private void Awake()
     {
@@ -29,10 +30,12 @@ public class PlayerAnimation : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         playerModel = GameObject.FindGameObjectWithTag("PlayerModel");
+       
     }
 
     private void Update()
     {
+        
         
         // Jump
         if (_inputs.Player.Jump.triggered && isGrounded && !isAttacking)
@@ -95,10 +98,19 @@ public class PlayerAnimation : MonoBehaviour
             if (_inputs.Player.MoveA.ReadValue<Vector2>().x > 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x > 0)
             {
                 playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
+                if (playerMarker != null)
+                {
+                    playerMarker.transform.rotation = Quaternion.Euler(90, 90, 0);
+                }
+
             }
             else if (_inputs.Player.MoveA.ReadValue<Vector2>().x < 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x < 0)
             {
                 playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
+                if (playerMarker != null)
+                {
+                    playerMarker.transform.rotation = Quaternion.Euler(90, -90, 0);
+                }
             }
         }
     }
