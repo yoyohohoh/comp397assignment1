@@ -47,8 +47,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] GameObject projectilePrefab;
-    [SerializeField] private float _lastHorizontalInput = 1.0f;
 
+    
 
     void Awake()
     {
@@ -105,8 +105,11 @@ public class PlayerController : MonoBehaviour
         }
 
         // Create movement vector, keeping Z component as 0
-        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;               
-        _controller.Move(movement);       
+        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;
+               
+        _controller.Move(movement);
+
+        // Apply gravity to Y velocity
         _velocity.y += _gravity * Time.fixedDeltaTime;
 
         // Move the player vertically (jumping/falling), without affecting the Z-axis
@@ -117,12 +120,6 @@ public class PlayerController : MonoBehaviour
         position.z = initialPosition.z; 
         transform.position = position;
 
-        // Update _lastHorizontalInput if there's any horizontal input
-        float horizontalInput = Input.GetAxis("Horizontal");        
-        if (horizontalInput != 0)
-        {
-            _lastHorizontalInput = horizontalInput;
-        }
 
 
 
@@ -160,12 +157,17 @@ public class PlayerController : MonoBehaviour
             // Calculate the spawn position on the right side of the player
             Vector3 spawnPosition = transform.position + transform.right * 1.0f;
 
-            // Use the last horizontal input to determine the movement direction
-            Vector3 movementDirection = new Vector3(_lastHorizontalInput, 0f, 0f).normalized;
+            // Determine the movement direction based on player input
+            float horizontalInput = Input.GetAxis("Horizontal");
+            Vector3 movementDirection = new Vector3(horizontalInput, 0f, 0f).normalized;
+
+            // Calculate the forward direction based on the movement direction
+            Vector3 forwardDirection = movementDirection.magnitude > 0f ? movementDirection : transform.forward;
 
             // Instantiate the projectile with the calculated forward direction as the rotation
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(movementDirection));
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(forwardDirection));
 
+            // Get the Projectile component from the instantiated projectile
             Projectile projectileComponent = projectile.GetComponent<Projectile>();
 
             if (projectileComponent != null)
@@ -173,8 +175,7 @@ public class PlayerController : MonoBehaviour
                 Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
                 if (projectileRigidbody != null)
                 {
-                    // Set the projectile's velocity in the movement direction
-                    projectileRigidbody.velocity = movementDirection * projectileComponent.speed;
+                    projectileRigidbody.velocity = forwardDirection * projectileComponent.speed;
                 }
             }
         }

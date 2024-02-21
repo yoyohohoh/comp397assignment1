@@ -10,7 +10,6 @@ TagManager:
   - Life
   - BounceObject
   - PlayerCrow
-  - Bullet
   - PlayerModel
   layers:
   - Default
