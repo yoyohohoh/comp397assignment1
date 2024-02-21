@@ -173,7 +173,11 @@ PrefabInstance:
     - target: {fileID: 976528204656724321, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1178189351}
+      objectReference: {fileID: 1066140932}
+    - target: {fileID: 976528204656724321, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2225295694778508053, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
       propertyPath: m_Name
       value: GameLevelUI
@@ -188,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 1178189351}
     - target: {fileID: 2782452115701682415, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
       propertyPath: far clip plane
-      value: 40
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2782452115701682415, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
       propertyPath: near clip plane
@@ -200,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2782452115701682415, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 126
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4221354699478737489, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
       propertyPath: m_Camera
@@ -1896,6 +1900,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0b2792fd3ecf274fa1b9172d6962562, type: 3}
+--- !u!20 &1066140932 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2782452115701682415, guid: 41133528ed8563f46a0d1d3d0eb3a7e3, type: 3}
+  m_PrefabInstance: {fileID: 62568658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1114534353
 PrefabInstance:
   m_ObjectHideFlags: 0
