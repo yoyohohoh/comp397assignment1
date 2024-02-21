@@ -8,7 +8,14 @@ public class MarkerController : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
-        transform.rotation = Quaternion.Euler(90, 0, 0);
+        if(target != null)
+        {
+            transform.position = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+            transform.rotation = Quaternion.Euler(90, 0, 0);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }
