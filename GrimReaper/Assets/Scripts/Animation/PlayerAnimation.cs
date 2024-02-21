@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -10,9 +11,12 @@ public class PlayerAnimation : MonoBehaviour
     private bool isGrounded = false;
     private bool isWalking = false;
     private bool isJumped = false;
+    private bool isAttacking = false;
     private bool isIdle = true;
 
     GrimReaper_LossofMemories _inputs;
+
+    [SerializeField] GameObject playerModel;
 
     private void Awake()
     {
@@ -24,12 +28,14 @@ public class PlayerAnimation : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        playerModel = GameObject.FindGameObjectWithTag("PlayerModel");
     }
 
     private void Update()
     {
+        
         // Jump
-        if (_inputs.Player.Jump.triggered && isGrounded)
+        if (_inputs.Player.Jump.triggered && isGrounded && !isAttacking)
         {
             isJumped = true;
             anim.SetBool("isJumped", isJumped);
@@ -40,6 +46,18 @@ public class PlayerAnimation : MonoBehaviour
             isJumped = false;
             anim.SetBool("isJumped", isJumped);
         }
+        
+        // Attack
+        if (_inputs.Player.FireA.triggered || _inputs.Player.FireB.triggered)
+        {
+            isAttacking = true;
+            anim.SetBool("isAttacking", isAttacking);
+        }
+        else
+        {
+            isAttacking = false;
+            anim.SetBool("isAttacking", isAttacking);
+        }
 
         // Walk
         Vector2 moveInput = _inputs.Player.MoveA.ReadValue<Vector2>() + _inputs.Player.MoveB.ReadValue<Vector2>();
@@ -49,6 +67,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             isWalking = true;
             anim.SetBool("isWalking", isWalking);
+            Flip();
         }
         else
         {
@@ -57,7 +76,7 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         // Idle
-        if (!isWalking && !isJumped)
+        if (!isWalking && !isJumped && !isAttacking)
         {
             isIdle = true;
             anim.SetBool("isIdle", isIdle);
@@ -66,6 +85,21 @@ public class PlayerAnimation : MonoBehaviour
         {
             isIdle = false;
             anim.SetBool("isIdle", isIdle);
+        }
+    }
+
+    private void Flip()
+    {
+        if (playerModel != null)
+        {
+            if (_inputs.Player.MoveA.ReadValue<Vector2>().x > 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x > 0)
+            {
+                playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
+            }
+            else if (_inputs.Player.MoveA.ReadValue<Vector2>().x < 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x < 0)
+            {
+                playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
+            }
         }
     }
 
