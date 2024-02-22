@@ -14,6 +14,7 @@ class PlayerData
     public string inventoryWatermelon;
     public string inventoryCherry;
     public string enemiesLeft;
+    public string hasKey;
 }
 
 [System.Serializable]
@@ -26,7 +27,7 @@ public class SaveGameManager
         return m_instance ??= new SaveGameManager();
     }
 
-    public void SaveGame(int level, Transform playerTransform, int life, int banana, int watermelon, int cherry, int enemies)
+    public void SaveGame(int level, Transform playerTransform, int life, int banana, int watermelon, int cherry, int enemies, bool hasKey)
     {
         var binaryFormatter = new BinaryFormatter();
         var file = File.Create(Application.persistentDataPath + "/MySaveData.txt");
@@ -39,7 +40,8 @@ public class SaveGameManager
             inventoryBanana = banana.ToString(),
             inventoryWatermelon = watermelon.ToString(),
             inventoryCherry = cherry.ToString(),
-            enemiesLeft = enemies.ToString()
+            enemiesLeft = enemies.ToString(),
+            hasKey = hasKey.ToString()
         };
         binaryFormatter.Serialize(file, data);
         file.Close();
