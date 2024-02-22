@@ -81,8 +81,9 @@ public class GamePlayUIController : MonoBehaviour
         int watermelon = DataKeeper.Instance.watermelonAmount;
         int cherry = DataKeeper.Instance.cherryAmount;
         int enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        bool hasKey = KeyController._instance.hasKey;
         Debug.Log(banana);
-        SaveGameManager.Instance().SaveGame(level, playerTransform, life, banana, watermelon, cherry, enemies);
+        SaveGameManager.Instance().SaveGame(level, playerTransform, life, banana, watermelon, cherry, enemies, hasKey);
     }
 //close the noti after save game
     public void CloseSaveMsg()
