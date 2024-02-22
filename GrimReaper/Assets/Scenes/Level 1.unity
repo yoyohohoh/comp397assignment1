@@ -1734,6 +1734,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 106958, guid: 9923332096aa0a54587e28f246da49de, type: 3}
+      propertyPath: m_TagString
+      value: TerrainObj
+      objectReference: {fileID: 0}
     - target: {fileID: 467390, guid: 9923332096aa0a54587e28f246da49de, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.7302704
@@ -2764,7 +2768,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2890063711773429808, guid: 76da1e85e3db6fc45bd9cda599aa2469, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -45
+      value: -45.4
       objectReference: {fileID: 0}
     - target: {fileID: 2890063711773429808, guid: 76da1e85e3db6fc45bd9cda599aa2469, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3441,6 +3445,10 @@ PrefabInstance:
     - target: {fileID: 184346, guid: 3cc32b211ba11174199a64a41ce904c2, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 184346, guid: 3cc32b211ba11174199a64a41ce904c2, type: 3}
+      propertyPath: m_TagString
+      value: TerrainObj
       objectReference: {fileID: 0}
     - target: {fileID: 426358, guid: 3cc32b211ba11174199a64a41ce904c2, type: 3}
       propertyPath: m_LocalScale.x
