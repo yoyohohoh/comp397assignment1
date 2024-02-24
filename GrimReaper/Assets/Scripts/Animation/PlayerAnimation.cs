@@ -71,11 +71,13 @@ public class PlayerAnimation : MonoBehaviour
             isWalking = true;
             anim.SetBool("isWalking", isWalking);
             Flip();
+            SoundController.instance.Play("Walk");
         }
         else
         {
             isWalking = false;
             anim.SetBool("isWalking", isWalking);
+
         }
 
         // Idle
