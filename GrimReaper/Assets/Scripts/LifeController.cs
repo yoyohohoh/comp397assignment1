@@ -51,6 +51,7 @@ public class LifeController : MonoBehaviour
             life--;
             PlayerController.Instance.InitiatePlayerPosition();
             GamePlayUIController.Instance.UpdateHealth(100.0f);
+            SoundController.instance.Play("Reborn");
         }
 
         switch (life)

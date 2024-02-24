@@ -19,6 +19,7 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             // Enemy is defeated, perform any additional logic (e.g., play animation, spawn particles)
+            SoundController.instance.Play("EnemyHit");
             Destroy(gameObject);
         }
     }

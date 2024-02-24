@@ -49,6 +49,8 @@ public class GamePlayUIController : MonoBehaviour
         SoundController.instance.Play("Click");
         pauseMsg.SetActive(true);
         Time.timeScale = 0;
+        GameObject.Find("Player").GetComponent<PlayerAnimation>().enabled = false;
+        GameObject.Find("AudioManager").GetComponent<AudioListener>().enabled = false;
 
     }
 
@@ -58,6 +60,8 @@ public class GamePlayUIController : MonoBehaviour
         SoundController.instance.Play("Click");
         pauseMsg.SetActive(false);
         Time.timeScale = 1;
+        GameObject.Find("Player").GetComponent<PlayerAnimation>().enabled = true;
+        GameObject.Find("AudioManager").GetComponent<AudioListener>().enabled = true;
     }
 
 //save game

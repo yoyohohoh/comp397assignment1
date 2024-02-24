@@ -204,6 +204,7 @@ public class PlayerController : MonoBehaviour
         {          
             Debug.Log("Player hit bounce object");
             _velocity.y = Mathf.Sqrt(bounceForce * -2f * _gravity);
+            SoundController.instance.Play("Jump");
         }
     }
 
