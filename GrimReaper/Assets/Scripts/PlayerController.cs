@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate()
-    {   
+    {
         _move = _joystick.Direction;
 
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
@@ -73,12 +73,12 @@ public class PlayerController : MonoBehaviour
         {
             _velocity.y = -2.0f;
         }
-        
+
         Jump();
 
         // Create movement vector, keeping Z component as 0
-        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;               
-        _controller.Move(movement);       
+        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;
+        _controller.Move(movement);
         _velocity.y += _gravity * Time.fixedDeltaTime;
 
         // Move the player vertically (jumping/falling), without affecting the Z-axis
@@ -86,11 +86,11 @@ public class PlayerController : MonoBehaviour
 
         //Fixed Z position
         Vector3 position = transform.position;
-        position.z = initialPosition.z; 
+        position.z = initialPosition.z;
         transform.position = position;
 
         // Update _lastHorizontalInput if there's any horizontal input
-        float horizontalInput = Input.GetAxis("Horizontal");        
+        float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput != 0)
         {
             _lastHorizontalInput = horizontalInput;
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot() // method will be called from PlayerAnimation.cs
     {
         Debug.Log("Shoot");
         SoundController.instance.Play("Attack");

@@ -55,10 +55,11 @@ public class PlayerAnimation : MonoBehaviour
         }
         
         // Attack
-        if (_inputs.Player.FireA.triggered || _inputs.Player.FireB.triggered)
+        if (_inputs.Player.Fire.triggered)
         {
             isAttacking = true;
             anim.SetBool("isAttacking", isAttacking);
+            PlayerController.Instance.Shoot();
         }
         else
         {
