@@ -628,6 +628,17 @@ public partial class @GrimReaper_LossofMemories: IInputActionCollection2, IDispo
                     ""action"": ""FireB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07a479b5-bf1d-4a3e-b2d2-04e43745efe9"",
+                    ""path"": ""<Joystick>/stick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }

@@ -55,15 +55,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _instance = this;
-
         _controller = GetComponent<CharacterController>();
-        _inputs = new GrimReaper_LossofMemories();
-        _inputs.Enable();
-
-        
-        _inputs.Player.Move.performed += context => _move = context.ReadValue<Vector2>();
-        _inputs.Player.Move.canceled += context => _move = Vector2.zero;
-        //_inputs.Player.Jump.performed += context => Jump();
     }
 
     void Start()
@@ -73,13 +65,17 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate()
-    {      
+    {   
+        _move = _joystick.Direction;
+
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
         if (_isGrounded && _velocity.y < 0.0f)
         {
             _velocity.y = -2.0f;
         }
-        _move = _joystick.Direction;
+        
+        Jump();
+
         // Create movement vector, keeping Z component as 0
         Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;               
         _controller.Move(movement);       
@@ -99,9 +95,6 @@ public class PlayerController : MonoBehaviour
         {
             _lastHorizontalInput = horizontalInput;
         }
-
-
-
     }
 
 
@@ -113,14 +106,14 @@ public class PlayerController : MonoBehaviour
 
     public void InitiatePlayerPosition()
     {
-        //initialPosition = new Vector3();
         _controller.enabled = false;
         transform.position = initialPosition;
         _controller.enabled = true;
     }
     void Jump()
     {
-        if (_isGrounded)
+        //if joystick direct to the up, player will jump
+        if (_move.y > 0 && _isGrounded)
         {
             SoundController.instance.Play("Jump");
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);

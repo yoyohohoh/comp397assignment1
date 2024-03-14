@@ -1279,6 +1279,14 @@ PrefabInstance:
       value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7347418463762785755, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
+      propertyPath: _joystick
+      value: 
+      objectReference: {fileID: 1145476495}
+    - target: {fileID: 7347418463762785755, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347418463762785755, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
       propertyPath: playerMarker
       value: 
       objectReference: {fileID: 1011877083}
@@ -2503,6 +2511,10 @@ PrefabInstance:
     - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Name
       value: Fixed Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: axisOptions
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
