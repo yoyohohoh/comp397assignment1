@@ -28,13 +28,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CharacterController _controller;
     [SerializeField] Vector3 initialPosition;
 
+    [Header("Joystick")]
+    [SerializeField] private Joystick _joystick;
+
     [Header("Movements")]
     [SerializeField] float _speed;
     [SerializeField] float _gravity = -30.0f;
     [SerializeField] float _jumpHeight = 3.0f;
     [SerializeField] Vector3 _velocity;
-    [SerializeField] float bounceForce = 5.0f; 
-    
+    [SerializeField] float bounceForce = 5.0f;    
 
     [Header("Ground Detection")]
     [SerializeField] Transform _groundCheck;
@@ -57,43 +59,17 @@ public class PlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _inputs = new GrimReaper_LossofMemories();
         _inputs.Enable();
+
+        
+        _inputs.Player.Move.performed += context => _move = context.ReadValue<Vector2>();
+        _inputs.Player.Move.canceled += context => _move = Vector2.zero;
+        //_inputs.Player.Jump.performed += context => Jump();
     }
 
     void Start()
     {
         //player initial position
         InitiatePlayerPosition();
-    }
-
-    private void Update()
-    {
-        //get data from datakeeper that which key player chose in the previous scene
-        isOgKey = DataKeeper.Instance.isOgKey;
-        if (!isOgKey)
-        {
-            Debug.Log("PlayerController say Move B " + isOgKey);
-            _inputs.Player.MoveB.Enable();
-            _inputs.Player.FireB.Enable();
-            _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
-            _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
-            _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireB.performed += context => Shoot();
-            _inputs.Player.MoveA.Disable();
-            _inputs.Player.FireA.Disable();
-        }
-        else
-        {
-            Debug.Log("PlayerController say Move A " + isOgKey);
-            _inputs.Player.MoveA.Enable();
-            _inputs.Player.FireA.Enable();
-            _inputs.Player.FireA.Enable();
-            _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
-            _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
-            _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireA.performed += context => Shoot();
-            _inputs.Player.MoveB.Disable();
-            _inputs.Player.FireB.Disable();
-        }
     }
 
     void FixedUpdate()
@@ -103,7 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             _velocity.y = -2.0f;
         }
-
+        _move = _joystick.Direction;
         // Create movement vector, keeping Z component as 0
         Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;               
         _controller.Move(movement);       
