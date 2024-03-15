@@ -42,11 +42,12 @@ public class PlayerAnimation : MonoBehaviour
 
 
         // Jump
-        if (_move.y > 0 && isGrounded && !isAttacking)
+        if (PlayerController.Instance.isjumped == true && isGrounded && !isAttacking)
         {
             isJumped = true;
             anim.SetBool("isJumped", isJumped);
             isGrounded = false;
+            PlayerController.Instance.isjumped = false;
         }
         else if (isGrounded)
         {
@@ -55,11 +56,12 @@ public class PlayerAnimation : MonoBehaviour
         }
         
         // Attack
-        if (_inputs.Player.Fire.triggered)
+        if (PlayerController.Instance.isAttacking == true)
         {
             isAttacking = true;
             anim.SetBool("isAttacking", isAttacking);
             PlayerController.Instance.Shoot();
+            PlayerController.Instance.isAttacking = false;
         }
         else
         {

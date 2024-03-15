@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
     bool isOgKey;
+    public bool isjumped;
+    public bool isAttacking;
 
 
     [Header("Character Controller")]
@@ -62,6 +64,8 @@ public class PlayerController : MonoBehaviour
     {
         //player initial position
         InitiatePlayerPosition();
+        isjumped = false;
+        isAttacking = false;
     }
 
     void FixedUpdate()
@@ -73,8 +77,6 @@ public class PlayerController : MonoBehaviour
         {
             _velocity.y = -2.0f;
         }
-
-        Jump();
 
         // Create movement vector, keeping Z component as 0
         Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;
@@ -110,11 +112,11 @@ public class PlayerController : MonoBehaviour
         transform.position = initialPosition;
         _controller.enabled = true;
     }
-    void Jump()
+    public void Jump() // method will be called from PlayerAnimation.cs
     {
-        //if joystick direct to the up, player will jump
-        if (_move.y > 0 && _isGrounded)
+        if (_isGrounded)
         {
+            isjumped = true;
             SoundController.instance.Play("Jump");
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
@@ -124,6 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Shoot");
         SoundController.instance.Play("Attack");
+        isAttacking = true;
         if (projectilePrefab != null)
         {
             // Calculate the spawn position on the right side of the player
