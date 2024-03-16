@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class MainMenuController : MonoBehaviour
 {
     [SerializeField] GameObject menu;
     [SerializeField] GameObject options;
+    [SerializeField] GameObject loadGame;
 
     public void Start()
     {
@@ -50,6 +52,7 @@ public class MainMenuController : MonoBehaviour
     {
         // Load game
         SoundController.instance.Play("Click");
+        loadGame.SetActive(true);
     }
 
 //open options panel
@@ -75,5 +78,10 @@ public class MainMenuController : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    public void MainMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

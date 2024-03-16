@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
+    [SerializeField] private Joystick _joystick;
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private LayerMask whatIsGround;
 
@@ -15,9 +16,11 @@ public class PlayerAnimation : MonoBehaviour
     private bool isIdle = true;
 
     GrimReaper_LossofMemories _inputs;
+    Vector2 _move;
 
     [SerializeField] GameObject playerModel;
     [SerializeField] GameObject playerMarker;
+
 
     private void Awake()
     {
@@ -35,14 +38,16 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
-        
-        
+        _move = _joystick.Direction;
+
+
         // Jump
-        if (_inputs.Player.Jump.triggered && isGrounded && !isAttacking)
+        if (PlayerController.Instance.isjumped == true && isGrounded && !isAttacking)
         {
             isJumped = true;
             anim.SetBool("isJumped", isJumped);
             isGrounded = false;
+            PlayerController.Instance.isjumped = false;
         }
         else if (isGrounded)
         {
@@ -51,10 +56,12 @@ public class PlayerAnimation : MonoBehaviour
         }
         
         // Attack
-        if (_inputs.Player.FireA.triggered || _inputs.Player.FireB.triggered)
+        if (PlayerController.Instance.isAttacking == true)
         {
             isAttacking = true;
             anim.SetBool("isAttacking", isAttacking);
+            PlayerController.Instance.Shoot();
+            PlayerController.Instance.isAttacking = false;
         }
         else
         {
@@ -63,10 +70,7 @@ public class PlayerAnimation : MonoBehaviour
         }
 
         // Walk
-        Vector2 moveInput = _inputs.Player.MoveA.ReadValue<Vector2>() + _inputs.Player.MoveB.ReadValue<Vector2>();
-        float moveMagnitude = moveInput.magnitude;
-
-        if (moveMagnitude > 0.1f)
+        if (_move.x != 0)
         {
             isWalking = true;
             anim.SetBool("isWalking", isWalking);
@@ -97,7 +101,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (playerModel != null)
         {
-            if (_inputs.Player.MoveA.ReadValue<Vector2>().x > 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x > 0)
+            if (_move.x > 0)
             {
                 playerModel.transform.rotation = Quaternion.Euler(0, 90, 0);
                 if (playerMarker != null)
@@ -106,7 +110,7 @@ public class PlayerAnimation : MonoBehaviour
                 }
 
             }
-            else if (_inputs.Player.MoveA.ReadValue<Vector2>().x < 0 || _inputs.Player.MoveB.ReadValue<Vector2>().x < 0)
+            else if (_move.x < 0)
             {
                 playerModel.transform.rotation = Quaternion.Euler(0, -90, 0);
                 if (playerMarker != null)

@@ -22,19 +22,23 @@ public class PlayerController : MonoBehaviour
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
     bool isOgKey;
+    public bool isjumped;
+    public bool isAttacking;
 
 
     [Header("Character Controller")]
     [SerializeField] CharacterController _controller;
     [SerializeField] Vector3 initialPosition;
 
+    [Header("Joystick")]
+    [SerializeField] private Joystick _joystick;
+
     [Header("Movements")]
     [SerializeField] float _speed;
     [SerializeField] float _gravity = -30.0f;
     [SerializeField] float _jumpHeight = 3.0f;
     [SerializeField] Vector3 _velocity;
-    [SerializeField] float bounceForce = 5.0f; 
-    
+    [SerializeField] float bounceForce = 5.0f;    
 
     [Header("Ground Detection")]
     [SerializeField] Transform _groundCheck;
@@ -53,51 +57,31 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         _instance = this;
-
         _controller = GetComponent<CharacterController>();
-        _inputs = new GrimReaper_LossofMemories();
-        _inputs.Enable();
     }
 
     void Start()
     {
         //player initial position
-        InitiatePlayerPosition();
-    }
-
-    private void Update()
-    {
-        //get data from datakeeper that which key player chose in the previous scene
-        isOgKey = DataKeeper.Instance.isOgKey;
-        if (!isOgKey)
+        if(DataKeeper.Instance.save1 != new Vector3 (0f, 0f, 0f))
         {
-            Debug.Log("PlayerController say Move B " + isOgKey);
-            _inputs.Player.MoveB.Enable();
-            _inputs.Player.FireB.Enable();
-            _inputs.Player.MoveB.performed += context => _move = context.ReadValue<Vector2>();
-            _inputs.Player.MoveB.canceled += context => _move = Vector2.zero;
-            _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireB.performed += context => Shoot();
-            _inputs.Player.MoveA.Disable();
-            _inputs.Player.FireA.Disable();
+            _controller.enabled = false;
+            transform.position = DataKeeper.Instance.save1;
+            _controller.enabled = true;
         }
         else
         {
-            Debug.Log("PlayerController say Move A " + isOgKey);
-            _inputs.Player.MoveA.Enable();
-            _inputs.Player.FireA.Enable();
-            _inputs.Player.FireA.Enable();
-            _inputs.Player.MoveA.performed += context => _move = context.ReadValue<Vector2>();
-            _inputs.Player.MoveA.canceled += context => _move = Vector2.zero;
-            _inputs.Player.Jump.performed += context => Jump();
-            _inputs.Player.FireA.performed += context => Shoot();
-            _inputs.Player.MoveB.Disable();
-            _inputs.Player.FireB.Disable();
+            InitiatePlayerPosition();
         }
+        
+        isjumped = false;
+        isAttacking = false;
     }
 
     void FixedUpdate()
-    {      
+    {
+        _move = _joystick.Direction;
+
         _isGrounded = Physics.CheckSphere(_groundCheck.position, _groundRadius, _groundMask);
         if (_isGrounded && _velocity.y < 0.0f)
         {
@@ -105,8 +89,8 @@ public class PlayerController : MonoBehaviour
         }
 
         // Create movement vector, keeping Z component as 0
-        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;               
-        _controller.Move(movement);       
+        Vector3 movement = new Vector3(_move.x, 0.0f, 0.0f) * _speed * Time.fixedDeltaTime;
+        _controller.Move(movement);
         _velocity.y += _gravity * Time.fixedDeltaTime;
 
         // Move the player vertically (jumping/falling), without affecting the Z-axis
@@ -114,18 +98,15 @@ public class PlayerController : MonoBehaviour
 
         //Fixed Z position
         Vector3 position = transform.position;
-        position.z = initialPosition.z; 
+        position.z = initialPosition.z;
         transform.position = position;
 
         // Update _lastHorizontalInput if there's any horizontal input
-        float horizontalInput = Input.GetAxis("Horizontal");        
+        float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput != 0)
         {
             _lastHorizontalInput = horizontalInput;
         }
-
-
-
     }
 
 
@@ -137,24 +118,25 @@ public class PlayerController : MonoBehaviour
 
     public void InitiatePlayerPosition()
     {
-        //initialPosition = new Vector3();
         _controller.enabled = false;
         transform.position = initialPosition;
         _controller.enabled = true;
     }
-    void Jump()
+    public void Jump() // method will be called from PlayerAnimation.cs
     {
         if (_isGrounded)
         {
+            isjumped = true;
             SoundController.instance.Play("Jump");
             _velocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravity);
         }
     }
 
-    void Shoot()
+    public void Shoot() // method will be called from PlayerAnimation.cs
     {
         Debug.Log("Shoot");
         SoundController.instance.Play("Attack");
+        isAttacking = true;
         if (projectilePrefab != null)
         {
             // Calculate the spawn position on the right side of the player
