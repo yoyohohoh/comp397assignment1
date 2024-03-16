@@ -89,6 +89,20 @@ public class DataKeeper : MonoBehaviour
         DataKeeper.Instance.soundVolume = volume;
     }
 
-
+    public void LoadGame(Transform playerTransform)
+    {
+        if(LoadGameManager.Instance.saveSlot == 1)
+        {           
+            Debug.Log("Save 1: " + playerTransform.position.ToString());
+        }
+        else if(LoadGameManager.Instance.saveSlot == 2)
+        {
+            Debug.Log("Save 2: " + playerTransform.position.ToString());
+        }
+        else if(LoadGameManager.Instance.saveSlot == 3)
+        {
+            Debug.Log("Save 3: " + playerTransform.position.ToString());
+        }
+    }
 
 }

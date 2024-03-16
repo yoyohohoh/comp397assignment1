@@ -88,6 +88,7 @@ public class GamePlayUIController : MonoBehaviour
         bool hasKey = KeyController._instance.hasKey;
         Debug.Log(banana);
         SaveGameManager.Instance().SaveGame(level, playerTransform, life, banana, watermelon, cherry, enemies, hasKey);
+        DataKeeper.Instance.LoadGame(playerTransform);
     }
 //close the noti after save game
     public void CloseSaveMsg()

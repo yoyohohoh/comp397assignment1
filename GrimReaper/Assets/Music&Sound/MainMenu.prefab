@@ -539,7 +539,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Empty
 --- !u!1 &1451836508093659073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2952,7 +2952,7 @@ GameObject:
   - component: {fileID: 4516681523976868401}
   - component: {fileID: 7651983114344164653}
   - component: {fileID: 8136089547451011552}
-  - component: {fileID: 5239889160307569491}
+  - component: {fileID: 4997351157865412379}
   m_Layer: 5
   m_Name: LoadGameMenu
   m_TagString: Untagged
@@ -3043,7 +3043,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5239889160307569491
+--- !u!114 &4997351157865412379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3052,19 +3052,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4835078891969954476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 522cf9d96e7413c40925601af76798d3, type: 3}
+  m_Script: {fileID: 11500000, guid: c8191124415044a4bae039cb401f39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionsPanel: {fileID: 7444328511911662926}
-  keyOption1On: {fileID: 0}
-  keyOption2On: {fileID: 0}
-  keyOption1Off: {fileID: 0}
-  keyOption2Off: {fileID: 0}
-  musicSlide: {fileID: 0}
-  soundSlide: {fileID: 0}
-  musicVolumeLevel: 0
-  soundVolumeLevel: 0
-  isOgKey: 0
+  save1: {fileID: 0}
+  save2: {fileID: 0}
+  save3: {fileID: 0}
 --- !u!1 &4926274125442474905
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,7 +4057,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Empty
 --- !u!1 &6038507268107229362
 GameObject:
   m_ObjectHideFlags: 0
@@ -6548,4 +6541,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Empty
