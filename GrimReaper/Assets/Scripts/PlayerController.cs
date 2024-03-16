@@ -63,7 +63,17 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //player initial position
-        InitiatePlayerPosition();
+        if(DataKeeper.Instance.save1 != new Vector3 (0f, 0f, 0f))
+        {
+            _controller.enabled = false;
+            transform.position = DataKeeper.Instance.save1;
+            _controller.enabled = true;
+        }
+        else
+        {
+            InitiatePlayerPosition();
+        }
+        
         isjumped = false;
         isAttacking = false;
     }

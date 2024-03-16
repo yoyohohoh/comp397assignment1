@@ -88,21 +88,25 @@ public class DataKeeper : MonoBehaviour
     {
         DataKeeper.Instance.soundVolume = volume;
     }
-
+    public Vector3 save1;
+    public Vector3 save2;
+    public Vector3 save3;
     public void LoadGame(Transform playerTransform)
     {
-        if(LoadGameManager.Instance.saveSlot == 1)
-        {           
+        //if(LoadGameManager.Instance.saveSlot == 1)
+        //{
+            save1 = playerTransform.position;
             Debug.Log("Save 1: " + playerTransform.position.ToString());
-        }
-        else if(LoadGameManager.Instance.saveSlot == 2)
-        {
-            Debug.Log("Save 2: " + playerTransform.position.ToString());
-        }
-        else if(LoadGameManager.Instance.saveSlot == 3)
-        {
-            Debug.Log("Save 3: " + playerTransform.position.ToString());
-        }
+        //}
+
     }
+    [SerializeField] GameObject player;
+    public void Save1()
+    {
+        Debug.Log("Load: " + save1.ToString());
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        player.transform.position= save1;
+    }
+
 
 }

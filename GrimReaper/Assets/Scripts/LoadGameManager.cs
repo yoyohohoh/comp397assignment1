@@ -15,12 +15,12 @@ public class LoadGameManager : MonoBehaviour
     }
     [SerializeField] GameObject panel;
     [SerializeField] Button save1;
-    [SerializeField] Button save2;
-    [SerializeField] Button save3;
 
-    private int saveCount;
-    public int saveSlot;
+    //private int saveCount;
+    //public int saveSlot;
     private string timeStamp;
+
+    public Transform save1Position;
 
     private void Awake()
     {
@@ -30,15 +30,14 @@ public class LoadGameManager : MonoBehaviour
     void Start()
     {
         panel.SetActive(false);
-        saveCount = 0;
+        //saveCount = 0;
         save1.interactable = false;
-        save2.interactable = false;
-        save3.interactable = false;
+
     }
 
     private void Update()
     {
-        saveSlot = saveCount % 3 + 1;
+        //saveSlot = saveCount % 3 + 1;
         timeStamp = System.DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
     }
 
@@ -49,25 +48,17 @@ public class LoadGameManager : MonoBehaviour
 
     public void UpdateButton()
     {
-        panel.SetActive(true);
-        switch (saveSlot)
-        {
-            case 1:
+        //switch (saveSlot)
+        //{
+        //    case 1:
                 save1.interactable = true;
                 save1.GetComponentInChildren<Text>().text = timeStamp;
                 GamePlayUIController.Instance.getDataAndSave();
-                break;
-            case 2:
-                save2.interactable = true;
-                save2.GetComponentInChildren<Text>().text = timeStamp;
-                GamePlayUIController.Instance.getDataAndSave();
-                break;
-            case 3:
-                save3.interactable = true;
-                save3.GetComponentInChildren<Text>().text = timeStamp;
-                GamePlayUIController.Instance.getDataAndSave();
-                break;
-        }
-        saveCount++;
+        //        break;
+        //    default:
+        //        break;
+        //}
+        //saveCount++;
     }
+
 }
