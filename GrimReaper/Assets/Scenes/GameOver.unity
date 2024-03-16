@@ -482,6 +482,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7290822048468648434, guid: a0721aa3391362b4280bf311f1928124, type: 3}
   m_PrefabInstance: {fileID: 1133142043}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &967126699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3701071426398191022, guid: a0721aa3391362b4280bf311f1928124, type: 3}
+  m_PrefabInstance: {fileID: 1133142043}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &979794544
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,6 +763,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 4997351157865412379, guid: a0721aa3391362b4280bf311f1928124, type: 3}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 2000529028}
+    - target: {fileID: 4997351157865412379, guid: a0721aa3391362b4280bf311f1928124, type: 3}
+      propertyPath: save1
+      value: 
+      objectReference: {fileID: 967126699}
     - target: {fileID: 6451502300459081141, guid: a0721aa3391362b4280bf311f1928124, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1212,6 +1231,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e001b081af81284f96a8573510fbc23, type: 3}
+--- !u!1 &2000529028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7444328511911662926, guid: a0721aa3391362b4280bf311f1928124, type: 3}
+  m_PrefabInstance: {fileID: 1133142043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2057158921
 GameObject:
   m_ObjectHideFlags: 0

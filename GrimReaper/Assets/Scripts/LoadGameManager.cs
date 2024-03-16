@@ -31,7 +31,16 @@ public class LoadGameManager : MonoBehaviour
     {
         panel.SetActive(false);
         //saveCount = 0;
-        save1.interactable = false;
+        if(DataKeeper.Instance.timeStamp1 == null)
+        {
+            save1.interactable = false;
+        }
+        else
+        {
+            save1.interactable = true;
+            save1.GetComponentInChildren<Text>().text = DataKeeper.Instance.timeStamp1;
+        }
+        
 
     }
 
@@ -59,6 +68,11 @@ public class LoadGameManager : MonoBehaviour
         //        break;
         //}
         //saveCount++;
+    }
+    public void Loading()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        DataKeeper.Instance.Loading();
     }
 
 }

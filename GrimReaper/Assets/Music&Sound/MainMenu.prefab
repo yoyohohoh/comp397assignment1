@@ -1021,6 +1021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 7964937445162200081}
   options: {fileID: 4470678663447483294}
+  loadGame: {fileID: 0}
 --- !u!1 &2237465592274134448
 GameObject:
   m_ObjectHideFlags: 0
@@ -3055,9 +3056,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8191124415044a4bae039cb401f39dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 0}
   save1: {fileID: 0}
-  save2: {fileID: 0}
-  save3: {fileID: 0}
+  save1Position: {fileID: 0}
 --- !u!1 &4926274125442474905
 GameObject:
   m_ObjectHideFlags: 0
@@ -3276,7 +3277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2476397344512080586
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4724,7 +4725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7224133588379911343
 RectTransform:
   m_ObjectHideFlags: 0
