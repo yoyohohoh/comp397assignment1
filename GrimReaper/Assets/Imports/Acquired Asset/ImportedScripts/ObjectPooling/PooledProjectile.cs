@@ -24,4 +24,17 @@ public class PooledProjectile : MonoBehaviour
       ProjectilePoolManager.Instance.ReturnToPool(this);
     }
   }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //if collide with enemy, enemy die
+        if (other.CompareTag("Enemy"))
+        {
+            Destroy(other.gameObject);
+        }
+        ProjectilePoolManager.Instance.ReturnToPool(this);
+
+        
+
+    }
 }

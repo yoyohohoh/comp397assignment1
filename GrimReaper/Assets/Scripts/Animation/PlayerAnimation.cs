@@ -21,7 +21,6 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] GameObject playerModel;
     [SerializeField] GameObject playerMarker;
 
-
     private void Awake()
     {
         _inputs = new GrimReaper_LossofMemories();
@@ -98,6 +97,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Flip()
     {
+
         if (playerModel != null)
         {
             if (_move.x > 0)
@@ -108,6 +108,7 @@ public class PlayerAnimation : MonoBehaviour
                     playerMarker.transform.rotation = Quaternion.Euler(90, 90, 0);
                 }
 
+
             }
             else if (_move.x < 0)
             {
@@ -115,7 +116,9 @@ public class PlayerAnimation : MonoBehaviour
                 if (playerMarker != null)
                 {
                     playerMarker.transform.rotation = Quaternion.Euler(90, -90, 0);
+                    
                 }
+
             }
         }
     }

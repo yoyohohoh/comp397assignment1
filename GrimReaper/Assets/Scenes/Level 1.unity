@@ -1430,37 +1430,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &227463267
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 227463268}
-  m_Layer: 0
-  m_Name: ProjectileSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &227463268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 227463267}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1892732560}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &314329324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 431408, guid: 36f3c19a7597eb94987d9f341e3010eb, type: 3}
@@ -1791,9 +1760,13 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3714927948038597953, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
+      propertyPath: playerMarker
+      value: 
+      objectReference: {fileID: 1011877083}
+    - target: {fileID: 3714927948038597953, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
       propertyPath: projectileSpawn
       value: 
-      objectReference: {fileID: 227463267}
+      objectReference: {fileID: 0}
     - target: {fileID: 3714927948038597953, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
       propertyPath: _projectileForce
       value: 15
@@ -1895,9 +1868,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7347418463762785755, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
+      propertyPath: playerSpawn
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347418463762785755, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
       propertyPath: playerMarker
       value: 
       objectReference: {fileID: 1011877083}
+    - target: {fileID: 7506149539498041663, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506149539498041663, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8595089111480898416, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
       propertyPath: m_TagString
       value: PlayerModel
@@ -1934,9 +1919,6 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3645512009118246776, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3990462986254707591, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 227463268}
     - targetCorrespondingSourceObject: {fileID: 2819092214791635846, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
       insertIndex: -1
       addedObject: {fileID: 728750763}
@@ -4601,11 +4583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c87e144975bf6847bb37f415dc20f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1892732560 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3990462986254707591, guid: 1c73dedc241f463499dbd11b4ea0f363, type: 3}
-  m_PrefabInstance: {fileID: 430494475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1935242369 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4071069836747969314, guid: 609cad5eb478dd849beaf2705286bdf7, type: 3}
