@@ -60,7 +60,6 @@ public class PlayerAnimation : MonoBehaviour
         {
             isAttacking = true;
             anim.SetBool("isAttacking", isAttacking);
-            PlayerController.Instance.Shoot();
             PlayerController.Instance.isAttacking = false;
         }
         else

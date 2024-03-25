@@ -122,8 +122,9 @@ public class PlayerController : MonoBehaviour
         transform.position = initialPosition;
         _controller.enabled = true;
     }
-    public void Jump() // method will be called from PlayerAnimation.cs
+    public void Jump() // method will be called from clicking jump button
     {
+        Debug.Log("Jump");
         if (_isGrounded)
         {
             isjumped = true;
@@ -132,7 +133,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Shoot() // method will be called from PlayerAnimation.cs
+    public void Shoot() // method will be called from clicking jump button
     {
         Debug.Log("Shoot");
         SoundController.instance.Play("Attack");

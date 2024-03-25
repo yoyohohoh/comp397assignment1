@@ -2035,6 +2035,7 @@ MonoBehaviour:
   save1: {x: 0, y: 0, z: 0}
   save2: {x: 0, y: 0, z: 0}
   save3: {x: 0, y: 0, z: 0}
+  timeStamp1: 
   player: {fileID: 925863153}
 --- !u!4 &480833175
 Transform:
