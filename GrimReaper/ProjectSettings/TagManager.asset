@@ -12,6 +12,7 @@ TagManager:
   - PlayerCrow
   - Bullet
   - PlayerModel
+  - Key
   layers:
   - Default
   - TransparentFX

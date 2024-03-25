@@ -18,6 +18,9 @@ public class GamePlayUIController : MonoBehaviour
     [SerializeField] GameObject inventory;
     [SerializeField] GameObject minimap;
 
+    [SerializeField] GameObject Key;
+    [SerializeField] GameObject noKey;
+
     private void Awake()
     {
         if (Instance != null)
@@ -41,7 +44,17 @@ public class GamePlayUIController : MonoBehaviour
 
     private void Update()
     {
-
+        //if tag "key" is found, show key icon
+        if (GameObject.FindGameObjectWithTag("Key"))
+        {
+            Key.SetActive(false);
+            noKey.SetActive(true);
+        }
+        else
+        {
+            Key.SetActive(true);
+            noKey.SetActive(false);
+        }
     }
 
     public void PauseGame()
