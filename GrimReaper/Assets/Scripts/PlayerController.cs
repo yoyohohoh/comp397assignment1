@@ -50,7 +50,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public string bounceTag = "BounceObject"; 
 
     [Header("Shooting")]
-    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] GameObject projectileSpawn;
+
+
+    [SerializeField] private float _projectileForce = 0f;
+
     [SerializeField] private float _lastHorizontalInput = 1.0f;
 
 
@@ -58,6 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         _instance = this;
         _controller = GetComponent<CharacterController>();
+
     }
 
     void Start()
@@ -138,29 +143,38 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Shoot");
         SoundController.instance.Play("Attack");
         isAttacking = true;
-        if (projectilePrefab != null)
-        {
-            // Calculate the spawn position on the right side of the player
-            Vector3 spawnPosition = transform.position + transform.right * 1.0f;
+        //if (projectilePrefab != null)
+        //{
+        //    // Calculate the spawn position on the right side of the player
+        //    Vector3 spawnPosition = transform.position + transform.right * 1.0f;
 
-            // Use the last horizontal input to determine the movement direction
-            Vector3 movementDirection = new Vector3(_lastHorizontalInput, 0f, 0f).normalized;
+        //    // Use the last horizontal input to determine the movement direction
+        //    Vector3 movementDirection = new Vector3(_lastHorizontalInput, 0f, 0f).normalized;
 
-            // Instantiate the projectile with the calculated forward direction as the rotation
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(movementDirection));
+        //    // Instantiate the projectile with the calculated forward direction as the rotation
+        //    GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(movementDirection));
 
-            Projectile projectileComponent = projectile.GetComponent<Projectile>();
+        //    Projectile projectileComponent = projectile.GetComponent<Projectile>();
 
-            if (projectileComponent != null)
-            {
-                Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
-                if (projectileRigidbody != null)
-                {
-                    // Set the projectile's velocity in the movement direction
-                    projectileRigidbody.velocity = movementDirection * projectileComponent.speed;
-                }
-            }
-        }
+        //    if (projectileComponent != null)
+        //    {
+        //        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
+        //        if (projectileRigidbody != null)
+        //        {
+        //            // Set the projectile's velocity in the movement direction
+        //            projectileRigidbody.velocity = movementDirection * projectileComponent.speed;
+        //        }
+        //    }
+        //}
+
+        //projectile pool
+        var projectile = ProjectilePoolManager.Instance.Get();
+        projectile.transform.SetPositionAndRotation(projectileSpawn.transform.position, Quaternion.Euler(projectileSpawn.transform.rotation.x, projectileSpawn.transform.rotation.y + 90, projectileSpawn.transform.rotation.z));
+        projectile.gameObject.SetActive(true);
+        projectile.gameObject.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * _projectileForce, ForceMode.Impulse);
+
+
+
 
     }
 
