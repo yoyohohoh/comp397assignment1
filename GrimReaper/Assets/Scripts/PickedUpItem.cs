@@ -13,19 +13,19 @@ public class PickedUpItem : MonoBehaviour
         {
             SoundController.instance.Play("Item");
             //if the game object name is banana
-            if (this.gameObject.name == "Banana")
+            if (this.gameObject.name == "Banana(Clone)")
             {
                 InventoryController.Instance.bananaCount++;
                 //sent to datakeeper, then show on inventory (stage 3)
             }
             //if the game object name is watermelon
-            if (this.gameObject.name == "Watermelon")
+            if (this.gameObject.name == "Watermelon(Clone)")
             {
                 InventoryController.Instance.watermelonCount++;
                 //sent to datakeeper, then show on inventory (stage 3)
             }
             //if the game object name is cherry 
-            if (this.gameObject.name == "Cherry")
+            if (this.gameObject.name == "Cherry(Clone)")
             {
                 InventoryController.Instance.cherryCount++;
                 //sent to datakeeper, then show on inventory (stage 3)
