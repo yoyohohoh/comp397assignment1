@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     GrimReaper_LossofMemories _inputs;
     Vector2 _move;
+    bool isFacingRight = true;
     bool isOgKey;
     public bool isjumped;
     public bool isAttacking;
@@ -50,8 +51,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public string bounceTag = "BounceObject"; 
 
     [Header("Shooting")]
+    [SerializeField] GameObject playerSight;
     [SerializeField] GameObject playerMarker;
-
 
     [SerializeField] private float _projectileForce = 0f;
 
@@ -138,48 +139,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Shoot() // method will be called from clicking jump button
+    public void Shoot() // method will be called from clicking shoot button
     {
         Debug.Log("Shoot");
         SoundController.instance.Play("Attack");
         isAttacking = true;
-        //if (projectilePrefab != null)
-        //{
-        //    // Calculate the spawn position on the right side of the player
-        //    Vector3 spawnPosition = transform.position + transform.right * 1.0f;
 
-        //    // Use the last horizontal input to determine the movement direction
-        //    Vector3 movementDirection = new Vector3(_lastHorizontalInput, 0f, 0f).normalized;
+        
 
-        //    // Instantiate the projectile with the calculated forward direction as the rotation
-        //    GameObject projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(movementDirection));
-
-        //    Projectile projectileComponent = projectile.GetComponent<Projectile>();
-
-        //    if (projectileComponent != null)
-        //    {
-        //        Rigidbody projectileRigidbody = projectile.GetComponent<Rigidbody>();
-        //        if (projectileRigidbody != null)
-        //        {
-        //            // Set the projectile's velocity in the movement direction
-        //            projectileRigidbody.velocity = movementDirection * projectileComponent.speed;
-        //        }
-        //    }
-        //}
-
-        //projectile pool
+        //projectile pool       
         var projectile = ProjectilePoolManager.Instance.Get();
-        projectile.transform.SetPositionAndRotation(new Vector3(playerMarker.transform.position.x, playerMarker.transform.position.y, playerMarker.transform.position.z), Quaternion.Euler(playerMarker.transform.rotation.x, playerMarker.transform.rotation.y + 90, playerMarker.transform.rotation.z));
+        projectile.transform.SetPositionAndRotation(playerSight.transform.position, Quaternion.Euler(playerSight.transform.rotation.x, playerSight.transform.rotation.y + 90, playerSight.transform.rotation.z));
         projectile.gameObject.SetActive(true);
-        if(playerMarker.transform.rotation.z < 0)
+        //projectile.gameObject.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * _projectileForce, ForceMode.Impulse);
+
+        //if the sight is facing right, the projectile will move to the right
+
+        //projectile.gameObject.GetComponent<Rigidbody>().AddForce(-projectile.transform.forward * _projectileForce, ForceMode.Impulse);
+
+        if (_move.x >= 0)
         {
+            Debug.Log("Player Sight: " + playerSight.transform.position.x);
             projectile.gameObject.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * _projectileForce, ForceMode.Impulse);
         }
-
-        if (playerMarker.transform.rotation.z > 0)
+        else if (_move.x < 0)
         {
-            projectile.gameObject.GetComponent<Rigidbody>().AddForce(projectile.transform.forward * -1 * _projectileForce, ForceMode.Impulse);
+            Debug.Log("Player Sight: " + playerSight.transform.position.x);
+            projectile.gameObject.GetComponent<Rigidbody>().AddForce(-projectile.transform.forward * _projectileForce, ForceMode.Impulse);
         }
+
 
 
 

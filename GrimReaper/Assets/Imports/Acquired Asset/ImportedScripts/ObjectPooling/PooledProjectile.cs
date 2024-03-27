@@ -19,10 +19,11 @@ public class PooledProjectile : MonoBehaviour
   private void Update()
   {
     _lifeTime += Time.deltaTime;
-    if (_lifeTime > _maxLifeTime)
-    {
-      ProjectilePoolManager.Instance.ReturnToPool(this);
-    }
+        if (_lifeTime > _maxLifeTime)
+        {
+            ProjectilePoolManager.Instance.ReturnToPool(this);
+        }
+    
   }
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +34,7 @@ public class PooledProjectile : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+
         }
 
         ProjectilePoolManager.Instance.ReturnToPool(this);
@@ -41,4 +42,4 @@ public class PooledProjectile : MonoBehaviour
         
 
     }
-}
+} 
