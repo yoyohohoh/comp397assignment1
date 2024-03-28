@@ -78,13 +78,13 @@ public class InventoryController : MonoBehaviour
 
     public void useBanana()
     {
-        if (bananaCount > 0)
-        {
+        //if (bananaCount > 0)
+        //{
             SoundController.instance.Play("Click");
             Debug.Log("Banana used");
             bananaCount--;
             GamePlayUIController.Instance.UpdateHealth(1.0f);
-        }
+        //}
     }
     public void useWatermelon()
     {
