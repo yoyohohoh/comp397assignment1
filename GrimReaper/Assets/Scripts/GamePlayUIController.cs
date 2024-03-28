@@ -37,7 +37,7 @@ public class GamePlayUIController : MonoBehaviour
     {
         pauseMsg.SetActive(false);
         saveMsg.SetActive(false);
-        inventory.SetActive(false);
+        //inventory.SetActive(false);
         minimap.SetActive(false);
         Debug.Log(Application.persistentDataPath + "/MySaveData.txt");
     }

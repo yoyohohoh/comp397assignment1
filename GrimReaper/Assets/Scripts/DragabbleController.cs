@@ -33,6 +33,7 @@ public class DraggableController : MonoBehaviour, IPointerDownHandler, IDragHand
     {
         _canvasGroup.blocksRaycasts = true;
         Debug.Log("Dropped at: " + eventData.position);
+        SoundController.instance.Play("Consume");    
         GamePlayUIController.Instance.UpdateHealth(1.0f);
         GetComponent<Image>().sprite = null;
         GetComponent<Image>().color = new Color(255, 255, 255, 0);
